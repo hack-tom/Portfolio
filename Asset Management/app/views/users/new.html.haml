@@ -1,0 +1,43 @@
+- content_for :title, "Create user"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      - flash.each do |name, msg|
+        - next unless name == 'alert' || name == 'notice'
+        .columns
+          .column.is-4.is-offset-4
+            .notification.is-danger.has-text-centered
+              %button.delete
+              = msg
+
+      .column.is-10.is-offset-1
+        %h3.title Create user
+        .box
+          = simple_form_for(@user) do |f|
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Email
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :email, label: false, required: '', placeholder: 'Email', input_html: {class: 'input', type: 'email'}
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Permission level
+              .field-body
+                .field{style: 'margin: auto'}
+                  .control
+                    .select.is-fullwidth
+                      = f.select :permission_id, [['User', 1], ['Asset Manager', 2], ['Administrator', 3]], {}, {class: ''}
+            %br
+            %br
+            .field.is-horizontal
+              .field-label
+                -#Left empty for spacing
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Cancel' , users_path, class: 'button is-light'
+                  .control
+                    = f.submit 'Create user', class: 'button is-block is-link'

@@ -1,0 +1,3 @@
+- content_for :title, "Internal Server Error"
+
+= render template: 'layouts/errors', locals: {error_message: 'Internal Server Error', error_code: 500}

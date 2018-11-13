@@ -1,0 +1,49 @@
+- content_for :title, "Home"
+
+%section.section
+  .container.is-fluid
+    = render partial: 'layouts/flash'
+
+    .columns.has-text-centered
+      .column.is-half.is-offset-one-quarter
+        = image_tag("amrc_main.png", width: "1000")
+    .columns
+      .column.is-half.is-offset-one-quarter
+        = form_tag items_path, enforce_utf8: false, method: :get do
+          .field.has-addons
+            .control.is-expanded
+              %input.input.awesomplete#awesomplete{type:'text', name: 'category_name', placeholder: 'Search for asset, category, serial, manufacturer', autofocus: '', "data-list" => @autocomplete, 'data-minchars' => 1}
+            .control
+              %button.button.is-info{type:'submit'}
+                Search
+    .field.is-grouped{style: 'justify-content: center'}
+      %p.control
+        = link_to 'Add Favourite Category', new_user_home_category_path, class: 'button is-link is-block'
+
+
+    %br
+    - unless @user_home_categories.blank?
+      - placeholder = 4 - (@user_home_categories.length % 5)
+      - @user_home_categories.each_slice(5) do |slice|
+        .columns
+          - slice.each do |usercat|
+            = link_to items_path(category_name: usercat.category.name), class: 'column' do
+              .card
+                .card-content.hero.is-small.is-light
+                  .columns.hero-body
+                    .column.has-text-centered
+                      - if usercat.category.icon?
+                        %span.icon.is-large
+                          = raw "#{usercat.category.icon}"
+                      - else
+                        %span.icon.is-large
+                          %i.far.fa-question-circle.fa-6x
+                %footer.card-footer
+                  %p.card-footer-item.has-text-centered
+                    %span View #{usercat.category.name}
+          - unless slice.length == 5
+            .column
+            - for _ in 0...placeholder
+              .column
+
+

@@ -1,0 +1,63 @@
+!!!
+%html
+  %head
+    %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    =stylesheet_link_tag :email
+  %body
+    .mail-outer-box
+      .mail-transparent-box
+        -# .mail-logo
+        -#   = image_tag(attachments['amrc_main.png'].url)
+        .mail-user-name
+          #{@user.givenname} #{@user.sn}
+      .inner-box
+        %h1.email-header-text
+          Your Booking Has Started
+        %h2.email-subheading-text
+          Your Booking has begun. You can collect your item any time before #{@booking.bookings[0].end_datetime.strftime("%H:%M - %e %b %Y")}
+        %br
+        %hr
+        .body-box
+          %h2
+            Booking Information
+          .email-field
+            %h3.email-body-header
+              Start Time:
+            .email-body-text
+              #{@booking.bookings[0].start_datetime.strftime("%d/%m/%Y at %H:%M")}
+          .email-field
+            %h3.email-body-header
+              End Time:
+            .email-body-text
+              #{@booking.bookings[0].end_datetime.strftime("%d/%m/%Y at %H:%M")}
+          .email-field
+            %h3.email-body-header
+              Location:
+            .email-body-text
+              #{@booking.bookings[0].next_location}
+          .email-field
+            %h3.email-body-header
+              Reason:
+            .email-body-text
+              #{@booking.bookings[0].reason}
+
+          .email-field
+            %h3.email-body-header
+              Items:
+
+          %table.email-table{:cellspacing => "0", :width => "100%"}
+            %thead
+              %tr
+                %th ID
+                %th Asset
+                %th Serial
+              %tbody
+                - @booking.bookings.each do |booking|
+                  %tr
+                    %td.has-text-centered= booking.item.id
+                    %td.has-text-centered= link_to booking.item.name, booking.item
+                    %td.has-text-centered= booking.item.serial
+        %br
+        %hr
+        %h2
+          Click #{link_to 'Here', bookings_url} to view your booking in full.

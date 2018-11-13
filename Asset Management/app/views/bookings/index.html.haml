@@ -1,0 +1,103 @@
+- content_for :title, "My Bookings"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered My Bookings
+  %p.title.has-text-centered
+    = link_to 'Book an asset', items_path, class: 'button is-success'
+  %table#bookings.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Details
+        %th ID
+        %th Main Asset
+        %th Peripherals
+        %th Start Date-Time
+        %th End Date-Time
+        %th Location
+        %th Reason
+        %th Action
+        %th.is-hidden Keywords
+    %tbody
+      - @combined_bookings.reverse_each do |combined_booking|
+        %tr
+          %td.details-control{"data-target" => "row-#{combined_booking.id}"}
+          %td.has-text-centered= combined_booking.id
+          %td.has-text-centered
+            = link_to combined_booking.bookings.first.item.name, combined_booking.bookings.first.item
+          %td.has-text-centered
+            - if combined_booking.bookings.length > 1
+              - combined_booking.bookings[1..-2].each do |booking|
+                = link_to booking.item.name + ', ', booking.item
+              = link_to combined_booking.bookings[-1].item.name, combined_booking.bookings[-1].item
+          %td.has-text-centered= combined_booking.bookings.first.start_datetime.strftime("%d %b %Y - %I:%M %p")
+          %td.has-text-centered= combined_booking.bookings.first.end_datetime.strftime("%d %b %Y - %I:%M %p")
+          %td.has-text-centered= combined_booking.bookings.first.next_location
+          %td.has-text-centered= combined_booking.bookings.first.reason
+          %td.has-text-centered
+            .buttons.is-centered
+              - if combined_booking.status < 3
+                = link_to set_booking_cancelled_combined_booking_path(combined_booking), data: { confirm: 'Are you sure you want cancel this booking?' }, method: :put, class: 'button is-danger' do
+                  %span.icon
+                    %i.fas.fa-ban
+                  %span Cancel all
+              - elsif (combined_booking.status == 3) || (combined_booking.status == 7)
+                = link_to set_booking_returned_combined_booking_path(combined_booking), data: { confirm: 'Are you sure? If you would like to change any item conditions, please return them separately.' }, method: :put, class: 'button is-link' do
+                  %span.icon
+                    %i.fas.fa-redo
+                  %span Return all
+              - elsif (combined_booking.status == 4) || (combined_booking.status == 5) || (combined_booking.status == 6)
+                = link_to new_item_booking_path(combined_booking.bookings.first.item.id), class: 'button is-link' do
+                  %span.icon
+                    %i.fas.fa-sync
+                  %span Book Again
+          %td.is-hidden
+            = render 'keywords', id: combined_booking.id
+
+        %tr.is-hidden{id: "row-#{combined_booking.id}"}
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+            = render 'keywords', id: combined_booking.id
+          %td{:colspan => 10}
+            %table.table.is-striped.is-bordered
+              %thead
+                %tr
+                  %th Asset Name
+                  %th Serial
+                  %th Status
+                  %th Action
+              %tbody
+                - @bookings.where(combined_booking_id: combined_booking.id).each do |booking|
+                  %tr
+                    %td.has-text-centered= link_to booking.item.name, booking.item
+                    %td.has-text-centered= link_to booking.item.serial, booking.item
+                    %td.has-text-centered
+                      = render 'booking_status', booking: booking
+                    %td.has-text-centered
+                      .buttons.is-centered
+                        - if booking.status < 3
+                          = link_to 'Edit', edit_booking_path(booking.id), class: 'button is-link'
+                          = link_to set_booking_cancelled_booking_path(booking), method: :put, class: 'button is-danger' do
+                            %span.icon
+                              %i.fas.fa-ban
+                            %span Cancel Booking
+                        - elsif (booking.status == 3) || (booking.status == 7)
+                          = link_to booking_returned_booking_path(booking), class: 'button is-link' do
+                            %span.icon
+                              %i.fas.fa-redo
+                            %span Return Item
+                        - elsif (booking.status == 4) || (booking.status == 5) || (booking.status == 6)
+                          = link_to new_item_booking_path(booking.item.id), class: 'button is-link' do
+                            %span.icon
+                              %i.fas.fa-sync
+                            %span Book Again

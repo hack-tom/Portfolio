@@ -1,0 +1,203 @@
+hr {
+  display: block;
+  border: 0;
+  border-top: 0.4em solid #ccc;
+  margin: 0.4em 0;
+  padding: 0;
+}
+
+.mail-outer-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: black;
+  width: 70%;
+  margin: 0 15% 15%;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.mail-transparent-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: black;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.mail-logo img {
+  display: block;
+  margin: auto;
+  width: 50%;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  /* float: left;
+  height: 5.5em;
+  width: auto; */
+  overflow: hidden;
+  border: none;
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: rgba(255, 255, 255, 1);
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.mail-user-name {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  display: inline;
+  float: right;
+  vertical-align: center;
+  overflow: hidden;
+  border: none;
+  max-height: 6em;
+  font: normal 1em/1 Arial Black, Gadget, sans-serif;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.inner-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 1em;
+  display: block;
+  overflow: hidden;
+  border: none;
+  font: normal 1em/1 Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: -webkit-linear-gradient(-90deg, rgb(255, 255, 255) 0, rgb(255, 255, 255) 95%, rgb(245, 245, 245) 100%), rgba(0, 0, 0, 0);
+  background: -moz-linear-gradient(180deg, rgb(255, 255, 255) 0, rgb(255, 255, 255) 95%, rgb(245, 245, 245) 100%), rgba(0, 0, 0, 0);
+  background: linear-gradient(180deg, rgb(255, 255, 255) 0, rgb(255, 255, 255) 95%, rgb(245, 245, 245) 100%), rgba(0, 0, 0, 0);
+  background-position: 50% 50%;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+  -webkit-box-shadow: 0 0 2px 2px rgb(245, 245, 245);
+  box-shadow: 0 0 2px 2px rgb(245, 245, 245);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.body-box{
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 0 20%;
+  padding: auto;
+  overflow: hidden;
+  border: none;
+  color: rgba(0,0,0,1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+
+}
+
+.email-header-text {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: auto;
+  padding: 1em 0 0;
+  overflow: hidden;
+  border: none;
+  font: normal normal bold 2em/1 Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.email-subheading-text {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: auto;
+  padding: 1em 0 0;
+  overflow: hidden;
+  border: none;
+  font: normal 1em/1 Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.email-body-header {
+  display: inline;
+
+
+}
+
+.email-field{
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  display: block;
+  padding: 1em 0 0;
+  margin: auto;
+  overflow: hidden;
+  border: none;
+  font: normal 1em/1 Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: left;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.email-body-text {
+  display: inline;
+}
+
+table.email-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 2px solid #DBDBDB;
+  width: 100%;
+  margin-top: 2em;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table.email-table td,
+table.email-table th {
+  border: 1px solid #DBDBDB;
+  padding: 3px 2px;
+}
+
+table.email-table tbody td {
+  font-size: 13px;
+}
+
+table.email-table thead {
+  border-bottom: 2px solid #DBDBDB;
+}
+
+table.email-table thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #1A1A1A;
+  text-align: center;
+  border-left: 1px solid #DBDBDB;
+}
+
+table.email-table thead th:first-child {
+  border-left: none;
+}
+
+table.email-table tfoot td {
+  font-size: 14px;
+}

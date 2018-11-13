@@ -1,0 +1,58 @@
+- content_for :title, "#{@user.givenname} #{@user.sn}"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  .columns
+    .column.is-4.is-offset-4
+      %h1.title.has-text-centered
+        - if current_user.eql? @user
+          My Details
+        - else
+          #{@user.givenname} #{@user.sn}'s Details
+      .box
+        %label.label Username:
+        %p #{@user.username}
+
+        %hr
+
+        %label.label Name:
+        %p #{@user.givenname} #{@user.sn}
+
+        %hr
+
+        %label.label Email:
+        %p #{@user.email}
+
+        %hr
+
+        %label.label Phone:
+        %p +44#{@user.phone}
+
+        %hr
+
+        %label.label Department / Company:
+        %p #{@user.ou}
+
+        %hr
+
+        %label.label Permission:
+        %p
+          - case @user.permission_id
+          - when 3
+            Admin
+          - when 2
+            Asset Manager
+          - else
+            User
+
+        %br
+        %br
+        .field.is-horizontal
+          .field-body
+            .field.is-grouped.is-grouped-right
+              .control
+                = link_to 'Back' , users_path, class: 'button is-block is-light'
+              .control
+                = link_to 'Edit Details' , edit_user_path, class: 'button is-block is-link'

@@ -1,0 +1,14 @@
+.tabs.is-centered
+  %ul
+    %li{class:"#{current_class?(requests_bookings_path)}"}
+      = link_to 'Requests', requests_bookings_path
+    %li{class:"#{current_class?(accepted_bookings_path)}"}
+      = link_to 'Accepted', accepted_bookings_path
+    %li{class:"#{current_class?(ongoing_bookings_path)}"}
+      = link_to 'Ongoing', ongoing_bookings_path
+    %li{class:"#{current_class?(completed_bookings_path)}"}
+      = link_to 'Completed', completed_bookings_path
+    %li{class:"#{current_class?(rejected_bookings_path)}"}
+      = link_to 'Rejected', rejected_bookings_path
+    %li{class:"#{current_class?(late_bookings_path)}"}
+      = link_to 'Late', late_bookings_path

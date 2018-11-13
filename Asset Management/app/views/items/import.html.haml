@@ -1,0 +1,128 @@
+- content_for :title, "Import assets from file"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      = render partial: 'layouts/flash'
+
+      .column.is-10.is-offset-1
+        %h3.title Import assets
+        .box
+          = simple_form_for :import_file, url: import_file_items_path, html: { multipart: true } do |f|
+            = f.error_notification
+
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Upload file
+              .field-body
+                .field
+                  .file.has-name.is-fullwidth
+                    %label.file-label
+                      = f.input :file, label: false, input_html: {class: 'file-input', type: 'file', accept: '.xlsx'}
+                      %span.file-cta
+                        %span.file-icon
+                          %i.fas.fa-upload
+                        %span.file-label
+                          Choose a file…
+                      %span.file-name#file_name
+                        Uploaded file name
+                  %p.help Only .xlsx files are allowed
+            %br
+            .field.is-horizontal
+              .field-label.has-text-left
+                -#Left empty for spacing
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Cancel' , root_path, class: 'button is-block is-light'
+                  .control
+                    = f.submit 'Import assets', class: 'button is-block is-link'
+      - if !params[:incorrect_rows].blank?
+        %br
+        %br
+        %br
+        %br
+        %p.title.has-text-centered Import Errors
+        %table#categories.table.is-striped.is-bordered
+          %thead
+            %tr
+              %th Row
+              %th Error
+              %th Example
+          %tbody
+            - params[:incorrect_rows].each do |row|
+              %tr
+                %td.has-text-centered
+                  = row[0].split(",").first.to_i + 2
+                %td.has-text-centered
+                  - case row[0].split(",").last.to_i
+                  - when 0
+                    This row's NAME cell is either empty or does not follow the correct format
+                  - when 1
+                    This row's SERIAL cell is either empty or does not follow the correct format
+                  - when 2
+                    This row's SERIAL cell already exists in the database and is not unique
+                  - when 3
+                    This row's CATEGORY cell is empty
+                  - when 4
+                    This row's CATEGORY cell does not exist in the database
+                  - when 5
+                    This row's CONDITION cell is either empty or does not follow the correct format
+                  - when 6
+                    This row's ACQUISITION_DATE cell does not follow the correct format
+                  - when 7
+                    This row's PURCHASE_PRICE cell does not follow the correct format
+                  - when 8
+                    This row's LOCATION cell is either empty or does not follow the correct format
+                  - when 9
+                    This row's MANUFACTURER cell does not follow the correct format
+                  - when 10
+                    This row's MODEL cell does not follow the correct format
+                  - when 11
+                    One of the peripheral assets in this row's PERIPHERALS cell does not exist in the database
+                  - when 12
+                    This row's RETIRED_DATE cell either does not follow the correct format or CONDITION is not set to Retired
+                  - when 13
+                    This row's PO_NUMBER cell does not follow the correct format
+                  - when 14
+                    This row's COMMENT cell does not follow the correct format
+                  - when 15
+                    This row's KEYWORDS cell does not follow the correct format
+                  - else
+                    Unknown
+                %td.has-text-centered
+                  - case row[0].split(",").last.to_i
+                  - when 0
+                    An appropriate NAME should be a STRING or TEXT
+                  - when 1
+                    An appropriate SERIAL should be a STRING or TEXT
+                  - when 2
+                    Please check the database whether this item has been added before, or use a different SERIAL
+                  - when 3
+                    An appropriate CATEGORY should be a STRING or TEXT
+                  - when 4
+                    Please check whether the category already exists in the database, if not you may create one and import it again
+                  - when 5
+                    An appropriate NAME should be one of the following: Like New/Good/Adequate/Damaged/Missing/Retired
+                  - when 6
+                    An appropriate ACQUISITION_DATE should be a legit DATE
+                  - when 7
+                    An appropriate PURCHASE_PRICE should be a FLOAT or INTEGER
+                  - when 8
+                    An appropriate LOCATION should be a STRING or TEXT
+                  - when 9
+                    An appropriate MANUFACTURER should be a STRING or TEXT
+                  - when 10
+                    An appropriate MODEL should be a STRING or TEXT
+                  - when 11
+                    Please check if all the peripheral asset exists in the database or if there is any typos
+                  - when 13
+                    An appropriate RETIRED_DATE should be in the DATE format and the CONDITION should be 'Retired'
+                  - when 14
+                    An appropriate PO_NUMBER should be a STRING or TEXT
+                  - when 15
+                    An appropriate COMMENT should be a STRING or TEXT
+                  - when 15
+                    Appropriate KEYWORDS should be STRING or TEXT separated by spaces
+                  - else
+                    Unknown

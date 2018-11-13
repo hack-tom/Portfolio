@@ -1,0 +1,103 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tag
+    = include_gon(init: true)
+
+    / Favicon
+    = favicon_link_tag 'favicon/apple-touch-icon.png', rel: 'apple-touch-icon', sizes: '180x180'
+    = favicon_link_tag 'favicon/favicon-32x32.png', rel: 'icon', sizes: '32x32', type: 'image/png'
+    = favicon_link_tag 'favicon/favicon-16x16.png', rel: 'icon', sizes: '16x16', type: 'image/png'
+    = favicon_link_tag 'favicon/site.webmanifest', rel: 'manifest'
+    = favicon_link_tag 'favicon/safari-pinned-tab.svg', rel: 'mask-icon', color: '#5bbad5'
+    = favicon_link_tag 'favicon/favicon.ico', rel: 'shortcut icon'
+    %meta{:content => "#da532c", :name => "msapplication-TileColor"}/
+    %meta{:content => "#{asset_path 'favicon/browserconfig.xml'}", :name => "msapplication-config"}/
+    %meta{:content => "#ffffff", :name => "theme-color"}/
+
+    %title Login - AMRC Asset Management System
+
+    / Bulma CSS, Google Open Sans font
+    = stylesheet_link_tag "//fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+    = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"
+    = stylesheet_link_tag "application"
+    :css
+      html,body {
+        font-family: 'Open Sans', serif;
+        font-size: 14px;
+        font-weight: 300;
+      }
+      .hero.is-success {
+        background: #F2F6FA;
+      }
+      .hero .nav, .hero.is-success .nav {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .box {
+        margin-top: 5rem;
+      }
+      .avatar {
+        margin-top: -70px;
+        padding-bottom: 20px;
+      }
+      .avatar img {
+        padding: 5px;
+        background: #fff;
+        border-radius: 50%;
+        -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+        box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+      }
+      input {
+        font-weight: 300;
+      }
+      p {
+        font-weight: 700;
+      }
+      p.subtitle {
+        padding-top: 1rem;
+      }
+
+  %body
+    %section.hero.is-success.is-fullheight.has-text-centered
+      .hero-body
+        .container
+          - flash.each do |name, msg|
+            - next unless name == 'alert' || name == 'notice'
+            .columns
+              .column.is-4.is-offset-4
+                .notification.is-danger.has-text-centered
+                  %button.delete
+                  = msg
+          .columns
+            .column.is-4.is-offset-4
+              %h3.title.has-text-grey Sign in
+              %p.subtitle.has-text-grey Please sign in to proceed
+              .box
+                %figure.avatar
+                  = image_tag("amrc.svg", width: "128")
+                = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+                  .field
+                    %p.control
+                      %label.label Username or Email
+                      = f.input :username, label: false, required: '', input_html: {class: 'input is-large', autofocus: ''}
+                  .field
+                    %p.control
+                      %label.label Password
+                      = f.input :password, label: false, required: '', input_html: {class: 'input is-large', type: 'password'}
+                  %br
+                  .control
+                    = f.submit 'Sign in', class: 'button is-block is-success is-large is-fullwidth'
+              %p.has-text-grey
+                = link_to 'Forgot Password', "https://www.sheffield.ac.uk/cics/account/problems"
+
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    = javascript_include_tag "//use.fontawesome.com/releases/v5.0.10/js/all.js"
+    = javascript_include_tag "//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"
+    = javascript_include_tag "//unpkg.com/bunnyjs@0.14.41/dist/element.min.js"
+    = javascript_include_tag "//unpkg.com/bunnyjs@0.14.41/dist/validation.min.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"
+    = javascript_include_tag "application"

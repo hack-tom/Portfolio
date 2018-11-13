@@ -1,0 +1,30 @@
+- content_for :title, "Add Favourite Category"
+
+%br
+%br
+%br
+.container.is-fluid.has-text-centered
+  .columns
+    .column.is-4.is-offset-4
+      .box
+        = simple_form_for(@user_home_category) do |f|
+          %h4.title
+            Add Favourite Category
+          .field.is-horizontal
+            .field-label.is-normal
+              %label.label Category
+            .field-body
+              .field
+                %p.control.is-expanded
+                  = f.hidden_field :user_id, value: current_user.id
+                  = f.association :category, label: false, input_html: {class: 'select2'},  selected: '', collection: @allowed
+          %br
+          .field.is-horizontal
+            .field-label.has-text-left
+              -#Left empty for spacing
+            .field-body
+              .field.is-grouped.is-grouped-right
+                .control
+                  = link_to 'Cancel' , root_path, class: 'button is-light'
+                .control
+                  = f.submit 'Add Category', class: 'button is-block is-link'

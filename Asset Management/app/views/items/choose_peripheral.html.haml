@@ -1,0 +1,27 @@
+- content_for :title, "Choose an existing asset as peripheral"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .column.is-10.is-offset-1
+        %h3.title Add peripheral for #{@item.name} (#{@item.serial})
+        .box
+          = simple_form_for @item, url: add_peripheral_item_path, method: :post do |f|
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Peripheral Asset
+              .field-body
+                .field
+                  .control
+                    = f.select :add_peripherals, @items.map { |i| [i.name + ' (' + i.serial + ')', i.id] }, {}, {class: 'select2', multiple: ''}
+            %br
+            %br
+            .field.is-horizontal
+              .field-label.has-text-left
+                -# Left empty for spacing
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Cancel', @item, class: 'button is-light'
+                  .control
+                    = f.submit 'Add as Peripheral', class: 'button is-block is-link', id: 'submitButton'

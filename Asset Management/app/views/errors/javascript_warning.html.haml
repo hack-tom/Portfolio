@@ -1,0 +1,53 @@
+!!!
+%html.has-navbar-fixed-top{:lang => "en"}
+  %head
+    / Required meta tags
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "ZerJun Eng", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tag
+    = include_gon(init: true)
+
+    / Favicon
+    = favicon_link_tag 'favicon/apple-touch-icon.png', rel: 'apple-touch-icon', sizes: '180x180'
+    = favicon_link_tag 'favicon/favicon-32x32.png', rel: 'icon', sizes: '32x32', type: 'image/png'
+    = favicon_link_tag 'favicon/favicon-16x16.png', rel: 'icon', sizes: '16x16', type: 'image/png'
+    = favicon_link_tag 'favicon/site.webmanifest', rel: 'manifest'
+    = favicon_link_tag 'favicon/safari-pinned-tab.svg', rel: 'mask-icon', color: '#5bbad5'
+    = favicon_link_tag 'favicon/favicon.ico', rel: 'shortcut icon'
+    %meta{:content => "#da532c", :name => "msapplication-TileColor"}/
+    %meta{:content => "#{asset_path 'favicon/browserconfig.xml'}", :name => "msapplication-config"}/
+    %meta{:content => "#ffffff", :name => "theme-color"}/
+
+    / Bulma CSS, Material Icons, Font Awesome
+    = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"
+    = stylesheet_link_tag '//fonts.googleapis.com/icon?family=Material+Icons'
+    = stylesheet_link_tag '//use.fontawesome.com/releases/v5.0.13/css/all.css'
+    = stylesheet_link_tag 'application'
+
+    %title JavaScript Required - AMRC Asset Management System
+
+  %body
+    %nav.navbar.is-fixed-top.is-light
+      .navbar-brand
+        = link_to root_path, class: "navbar-item #{current_class?(root_path)}" do
+          = image_tag("amrc_home.svg", width: "75")
+
+    %section.hero
+      .hero-body
+        .container
+          .card.column.is-5.is-offset-4
+            %header.card-header
+              %p.card-header-title JavaScript Required
+            .card-content
+              .content
+                %p Sorry, it appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
+                %p
+                  Please enable JavaScript or use a different web browser, or alternatively contact
+                  = mail_to "support@epigenesys.org.uk"
+            %footer.card-footer
+              %p.card-footer-item
+                = link_to 'Reload Page', root_path, class: 'button'
+              %p.card-footer-item
+                = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "button is-link", id: "sign_out"

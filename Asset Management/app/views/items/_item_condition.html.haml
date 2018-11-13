@@ -1,0 +1,22 @@
+- case item.condition
+- when 'Like New'
+  %span.tag.is-success.is-medium
+    = item.condition
+- when 'Good'
+  %span.tag.is-primary.is-medium
+    = item.condition
+- when 'Adequate'
+  %span.tag.is-warning.is-medium
+    = item.condition
+- when 'Damaged'
+  %span.tag.is-danger.is-medium
+    = item.condition
+- when 'Missing'
+  %span.tag.is-danger.is-medium
+    = item.condition
+- when 'Retired'
+  %span.tag.is-danger.is-medium
+    = item.condition
+- else
+  %span.tag.is-black.is-medium
+    Unknown

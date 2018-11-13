@@ -1,0 +1,9 @@
+- if @manager.eql? current_user
+  .tabs.is-centered
+    %ul
+      %li{class: "#{current_class?(manager_items_path(user_id: current_user.id))}"}
+        = link_to 'All Items', manager_items_path(user_id: current_user.id)
+      %li{class: "#{current_class?(manager_items_path(tab: "OnLoan", user_id: current_user.id))}"}
+        = link_to 'Out On Booking', manager_items_path(tab: "OnLoan", user_id: current_user.id)
+      %li{class: "#{current_class?(manager_items_path(tab: "Issue", user_id: current_user.id))}"}
+        = link_to 'Issue', manager_items_path(tab: "Issue", user_id: current_user.id)

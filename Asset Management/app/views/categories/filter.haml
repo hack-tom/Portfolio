@@ -1,0 +1,20 @@
+- content_for :title, "Categories"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered Current categories
+  - if can?(:create, Category)
+    %p.title.has-text-centered
+      = link_to 'Create new', new_category_path, class: 'button is-success'
+  %table#categories.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Category
+    %tbody
+      - @categories.each do |category|
+        %tr
+          %td.has-text-centered
+            = link_to category.name, items_path(category_name: category.name)
+

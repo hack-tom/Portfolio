@@ -1,0 +1,14 @@
+%section.hero.is-large
+  .hero-body
+    .container
+      .columns
+        .column.is-3.is-offset-2
+          %h1.title{:style => "font-size: 70px;color:#ff470f"}= error_code
+          %h2.subtitle.is-30= error_message
+        .column.is-5
+          %p
+            Sorry, there was a problem, please try again.
+          %br
+          %p
+            If you continue to see this message please send a description of the problem to:
+            = mail_to "support@epigenesys.org.uk"

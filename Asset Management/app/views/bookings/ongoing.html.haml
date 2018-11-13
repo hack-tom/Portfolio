@@ -1,0 +1,63 @@
+- content_for :title, "Ongoing Bookings"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  = render "tabs"
+
+  %p.title.has-text-centered Ongoing Bookings
+  %table#bookings_other.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Details
+        %th ID
+        %th Main Asset
+        %th Start Date-Time
+        %th End Date-Time
+        %th Location
+        %th Reason
+        %th Booked By
+        %th.is-hidden Keywords
+    %tbody
+      - @combined_bookings.each do |combined_booking|
+        %tr
+          %td.details-control{"data-target" => "row-#{combined_booking.id}"}
+          %td.has-text-centered= combined_booking.id
+          %td.has-text-centered= link_to combined_booking.bookings.first.item.name, combined_booking.bookings.first.item
+          %td.has-text-centered= combined_booking.bookings.first.start_datetime.strftime("%d %b %Y - %I:%M %p")
+          %td.has-text-centered= combined_booking.bookings.first.end_datetime.strftime("%d %b %Y - %I:%M %p")
+          %td.has-text-centered= combined_booking.bookings.first.next_location
+          %td.has-text-centered= combined_booking.bookings.first.reason
+          %td.has-text-centered= link_to combined_booking.user.givenname, combined_booking.user
+          %td.is-hidden
+            = render 'keywords', id: combined_booking.id
+
+        %tr.is-hidden{id: "row-#{combined_booking.id}"}
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+          %td.is-hidden
+            = render 'keywords', id: combined_booking.id
+          %td{colspan: 9}
+            %table.table.is-striped.is-bordered
+              %thead
+                %tr
+                  %th Asset Name
+                  %th Serial
+                  %th Status
+                  %th Owner
+              %tbody
+                - @bookings.where(combined_booking_id: combined_booking.id).each do |booking|
+                  %tr
+                    %td.has-text-centered= link_to booking.item.name, booking.item
+                    %td.has-text-centered= link_to booking.item.serial, booking.item
+                    %td.has-text-centered
+                      = render 'booking_status', booking: booking
+                    %td.has-text-centered
+                      = booking.item.user.givenname + " " + booking.item.user.sn

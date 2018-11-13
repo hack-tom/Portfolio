@@ -1,0 +1,15 @@
+- if (not notice.blank?) || (not alert.blank?) || (not warning.blank?)
+  .columns
+    .column.is-4.is-offset-4
+      - if notice
+        .notification.is-success.has-text-centered
+          %button.delete
+          = notice
+      - elsif alert
+        .notification.is-danger.has-text-centered
+          %button.delete
+          = alert
+      - else
+        .notification.is-warning.has-text-centered
+          %button.delete
+          = warning

@@ -1,0 +1,42 @@
+- content_for :title, "Users"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered Current users
+  %p.title.has-text-centered
+    = link_to 'Create new', new_user_path, class: 'button is-success'
+  %table#users.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Permission Level
+        %th Action
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td.has-text-centered
+            = link_to user.givenname.to_s + ' ' + user.sn.to_s, user
+          %td.has-text-centered= user.email
+          %td.has-text-centered
+            - case user.permission_id
+            - when 3
+              Admin
+            - when 2
+              Asset Manager
+            - else
+              User
+          %td
+            .field.is-grouped.is-grouped-centered
+              %p.control
+                = link_to user, class: "button is-primary", id: "view_user_#{user.username}" do
+                  %span.icon
+                    %i.fas.fa-eye
+                  %span View
+              %p.control
+                = link_to edit_user_path(user), class: 'button is-link' do
+                  %span.icon
+                    %i.fas.fa-edit
+                  %span Edit

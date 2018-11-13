@@ -1,0 +1,75 @@
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  - if @manager.eql? current_user
+    - content_for :title, "My Assets"
+    %p.title.has-text-centered My Assets
+  - else
+    - content_for :title, "#{@manager.givenname} #{@manager.sn}'s Assets"
+    %p.title.has-text-centered #{@manager.givenname} #{@manager.sn}'s Assets
+
+  = render "tabs"
+
+  = form_tag change_manager_multiple_items_path do
+    %table#assets.table.is-striped.is-bordered
+      %thead
+        %tr
+          - if @manager.eql? current_user
+            %th
+          %th Name
+          %th Serial
+          %th Category
+          %th Manufacturer
+          %th Condition
+          - if params[:tab] == "OnLoan"
+            %th Booking Location
+            %th Booking Status
+            %th Booked By
+          - else
+            %th Location
+      %tbody
+        - if params[:tab] == "OnLoan"
+          - @bookings.each do |booking|
+            %tr
+              - if @manager.eql? current_user
+                %td
+                  = check_box_tag "item_ids[]", booking.item.id
+              %td.has-text-centered= link_to booking.item.name, booking.item
+              %td.has-text-centered= booking.item.category.name
+              %td.has-text-centered= booking.item.manufacturer
+              %td.has-text-centered
+                = render 'item_condition', item: booking.item
+              - if params[:tab] == "OnLoan"
+                %td.has-text-centered= booking.next_location
+                %td.has-text-centered
+                  = render 'bookings/booking_status', booking: booking
+                %td.has-text-centered= link_to booking.user.givenname, booking.user
+              - else
+                %td.has-text-centered= booking.item.location
+        - else
+          - @items.each do |item|
+            %tr
+              - if @manager.eql? current_user
+                %td
+                  = check_box_tag "item_ids[]", item.id
+              %td.has-text-centered= link_to item.name, item
+              %td.has-text-centered= link_to item.serial, item
+              %td.has-text-centered= item.category.name
+              %td.has-text-centered= item.manufacturer
+              %td.has-text-centered
+                = render 'item_condition', item: item
+              %td.has-text-centered= item.location
+
+    - if @manager.eql? current_user
+      - if params[:tab] == "OnLoan"
+        - if @bookings.any?
+          .columns
+            .column
+              .buttons.is-centered
+                = submit_tag "Transfer Selection", class:'button is-link is-block'
+      - elsif @items.any?
+        .columns
+          .column
+            .buttons.is-centered
+              = submit_tag "Transfer Selection", class:'button is-link is-block'

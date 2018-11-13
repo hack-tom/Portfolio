@@ -1,0 +1,124 @@
+!!!
+%html.has-navbar-fixed-top{:lang => "en"}
+  %head
+    / Required meta tags
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "ZerJun Eng", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tag
+    = include_gon(init: true)
+
+    / Favicon
+    = favicon_link_tag 'favicon/apple-touch-icon.png', rel: 'apple-touch-icon', sizes: '180x180'
+    = favicon_link_tag 'favicon/favicon-32x32.png', rel: 'icon', sizes: '32x32', type: 'image/png'
+    = favicon_link_tag 'favicon/favicon-16x16.png', rel: 'icon', sizes: '16x16', type: 'image/png'
+    = favicon_link_tag 'favicon/site.webmanifest', rel: 'manifest'
+    = favicon_link_tag 'favicon/safari-pinned-tab.svg', rel: 'mask-icon', color: '#5bbad5'
+    = favicon_link_tag 'favicon/favicon.ico', rel: 'shortcut icon'
+    %meta{:content => "#da532c", :name => "msapplication-TileColor"}/
+    %meta{:content => "#{asset_path 'favicon/browserconfig.xml'}", :name => "msapplication-config"}/
+    %meta{:content => "#ffffff", :name => "theme-color"}/
+
+    / Bulma CSS, Material Icons, Font Awesome
+    = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"
+    = stylesheet_link_tag '//fonts.googleapis.com/icon?family=Material+Icons'
+    = stylesheet_link_tag '//use.fontawesome.com/releases/v5.0.13/css/all.css'
+    = stylesheet_link_tag 'application'
+
+    %title #{content_for(:title)} - AMRC Asset Management System
+
+  %body
+    %noscript
+      %meta{'http-equiv' => 'refresh', :content => "0;URL=#{javascript_warning_path}"}/
+
+    %nav.navbar.is-fixed-top.is-light
+      .navbar-brand
+        = link_to root_path, class: "navbar-item #{current_class?(root_path)}" do
+          = image_tag("amrc_home.svg", width: "75")
+        .dropdown.is-active.is-hidden-desktop#mobile_notification_dropdown
+          .dropdown-trigger{"data-behavior" => "notification-link"}
+            %button.button{"aria-haspopup" => "true", "aria-controls" => "dropdown-menu"}
+              %span.icon
+                %i.fas.fa-bell.notifications-bell
+                %span{"data-behavior" => "unread-count"}
+          .dropdown-menu#dropdown-menu{:role => "menu"}
+            .dropdown-content{"data-behavior" => "notification-items-mobile" }
+        .navbar-burger.burger{"data-target" => "navbarExampleTransparentExample"}
+          %span
+          %span
+          %span
+      #navbarExampleTransparentExample.navbar-menu{"data-behavior" => "notifications"}
+        .navbar-start
+          .navbar-item.has-dropdown.is-hoverable
+            %a.navbar-link
+              %p Browse by <br class="is-hidden-widescreen"><strong>Categories</strong>
+            .navbar-dropdown.is-boxed
+              - categories = Category.take(5)
+              - categories.each do |category|
+                = link_to category.name, items_path(category_name: category.name), class: "navbar-item"
+              = link_to 'View All', filter_categories_path, class: "navbar-item"
+          = link_to 'Assets', items_path, class: "navbar-item #{current_class?(items_path)}"
+          = link_to 'Asset Managers', manager_users_path, class: "navbar-item #{current_class?(manager_users_path)}"
+          - if can?(:read, Category)
+            = link_to 'Categories', categories_path, class: "navbar-item #{current_class?(categories_path)} is-hidden-custom"
+            - if can?(:read, User)
+              = link_to 'Users', users_path, class: "navbar-item #{current_class?(users_path)} is-hidden-custom"
+          - if can?(:read, Category)
+            .navbar-item.has-dropdown.is-hoverable.is-hidden.is-show-custom
+              %a.navbar-link
+                %p More
+              .navbar-dropdown.is-boxed
+                = link_to 'Categories', categories_path, class: "navbar-item #{current_class?(categories_path)}"
+                - if can?(:read, User)
+                  = link_to 'Users', users_path, class: "navbar-item #{current_class?(users_path)}"
+
+        .navbar-end
+          - if can?(:manage, Booking)
+            .navbar-item.has-dropdown.is-hoverable
+              = link_to requests_bookings_path, class: 'navbar-link' do
+                Asset <br class="is-hidden-widescreen"> Requests
+              .navbar-dropdown.is-boxed.is-right
+                = link_to 'Requests', requests_bookings_path, class: "navbar-item #{current_class?(requests_bookings_path)}"
+                = link_to 'Accepted Bookings', accepted_bookings_path, class: "navbar-item #{current_class?(accepted_bookings_path)}"
+                = link_to 'Ongoing Bookings', ongoing_bookings_path, class: "navbar-item #{current_class?(ongoing_bookings_path)}"
+                = link_to 'Completed Bookings', completed_bookings_path, class: "navbar-item #{current_class?(completed_bookings_path)}"
+                = link_to 'Rejected Bookings', rejected_bookings_path, class: "navbar-item #{current_class?(rejected_bookings_path)}"
+                = link_to 'Late Bookings', late_bookings_path, class: "navbar-item #{current_class?(late_bookings_path)}"
+            .navbar-item.has-dropdown.is-hoverable
+              %a.navbar-link
+                Create
+              .navbar-dropdown.is-boxed.is-right
+                = link_to 'Asset', new_item_path, class: "navbar-item #{current_class?(new_item_path)}"
+                = link_to 'Peripheral', new_item_path(is_peripheral: true), class: "navbar-item #{current_class?(new_item_path(is_peripheral: true))}"
+                = link_to 'Category', new_category_path, class: "navbar-item #{current_class?(new_category_path)}"
+                - if can?(:manage, User)
+                  = link_to 'User', new_user_path, class: "navbar-item #{current_class?(new_user_path)}"
+          .navbar-item.has-dropdown.is-hoverable.is-hidden-touch{"data-behavior" => "notification-link"}
+            %a.navbar-link
+              %span.badge.is-badge-danger{"data-behavior" => "unread-count"}
+                %span.icon
+                  %i.fas.fa-bell.notifications-bell
+            .navbar-dropdown.is-boxed.is-right{"data-behavior" => "notification-items"}
+          .navbar-item.has-dropdown.is-hoverable
+            %a.navbar-link
+              %span.icon
+                %i.fas.fa-user
+              %span
+                #{current_user.givenname}
+            .navbar-dropdown.is-boxed.is-right
+              - if can?(:create, Item)
+                = link_to 'My Assets', manager_items_path(user_id: current_user.id), class: "navbar-item #{current_class?(manager_items_path(user_id: current_user.id))}"
+              = link_to 'My Bookings', bookings_path, class: "navbar-item #{current_class?(bookings_path)}"
+              = link_to 'My Profile', current_user, class: "navbar-item #{current_class?("/users/#{current_user.id}")}"
+              = link_to 'Manage Favourites', user_home_categories_path, class: "navbar-item #{current_class?(user_home_categories_path)}"
+              = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "navbar-item", id: "sign_out"
+    = yield
+
+    / jQuery, Datatable, bunnyJS, momentJS
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    = javascript_include_tag "//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"
+    = javascript_include_tag "//unpkg.com/bunnyjs@0.14.41/dist/element.min.js"
+    = javascript_include_tag "//unpkg.com/bunnyjs@0.14.41/dist/validation.min.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"
+    = javascript_include_tag "application"

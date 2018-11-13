@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @user_home_category.user
+%p
+  %b Category:
+  = @user_home_category.category
+
+= link_to 'Edit', edit_user_home_category_path(@user_home_category)
+\|
+= link_to 'Back', user_home_categories_path

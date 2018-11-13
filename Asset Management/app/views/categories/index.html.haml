@@ -1,0 +1,46 @@
+- content_for :title, "Categories"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered Current categories
+  %p.title.has-text-centered
+    = link_to 'Create new', new_category_path, class: 'button is-success'
+
+  %table#categories.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Category
+        %th Icon
+        %th Action
+    %tbody
+      - @categories.each do |category|
+        %tr
+          %td.has-text-centered
+            = category.name
+          %td.has-text-centered
+            - if category.icon?
+              %span.icon.is-normal
+                = raw "#{category.icon.gsub('fa-6x', 'fa-2x')}"
+            - else
+              %span.icon.is-normal
+                %i.far.fa-question-circle.fa-2x
+          %td
+            .field.is-grouped.is-grouped-centered
+              - if !category.is_peripheral && !category.has_peripheral
+                %p.control
+                  = link_to new_peripheral_category_path(id: category.id), method: :post, data: { confirm: 'Are you sure you want to create a Peripheral category for this category?' }, class: 'button is-primary' do
+                    %span.icon
+                      %i.fas.fa-plus
+                    %span Create Peripheral Category
+              %p.control
+                = link_to edit_category_path(category), class: 'button is-link' do
+                  %span.icon
+                    %i.fas.fa-edit
+                  %span Edit
+              %p.control
+                = link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger', id: "delete_category_#{category.id}" do
+                  %span.icon
+                    %i.fas.fa-trash
+                  %span Delete

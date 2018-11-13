@@ -1,0 +1,19 @@
+- @bookings.where(combined_booking_id: id).each do |booking|
+  #{booking.item.name} #{booking.item.serial}
+  - case booking.status
+  - when 1
+    Pending
+  - when 2
+    Accepted
+  - when 3
+    Ongoing
+  - when 4
+    Completed
+  - when 5
+    Rejected
+  - when 6
+    Cancelled
+  - when 7
+    Late
+  - else
+    Unknown

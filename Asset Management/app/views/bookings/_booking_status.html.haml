@@ -1,0 +1,25 @@
+- case booking.status
+- when 1
+  %span.tag.is-warning.is-medium
+    Pending
+- when 2
+  %span.tag.is-success.is-medium
+    Accepted
+- when 3
+  %span.tag.is-info.is-medium
+    Ongoing
+- when 4
+  %span.tag.is-success.is-medium
+    Completed
+- when 5
+  %span.tag.is-danger.is-medium
+    Rejected
+- when 6
+  %span.tag.is-danger.is-medium
+    Cancelled
+- when 7
+  %span.tag.is-danger.is-medium
+    Late
+- else
+  %span.tag.is-black.is-medium
+    Unknown

@@ -1,0 +1,131 @@
+- content_for :title, "#{@item.name}"
+
+%section.section
+  .container.is-desktop
+    = render partial: 'layouts/flash'
+
+    .box
+      .columns
+        - if @item.image?
+          .column.is-5.has-text-centered#zoom{style: 'margin: auto'}
+            = image_tag(@item.image.url, alt: 'Image')
+        -else
+          .column.is-5.has-text-centered{style: 'margin: auto'}
+            = image_tag("amrc.svg", width: "250", alt: 'Default Image, AMRC')
+        .column
+          %table.table.is-bordered.is-striped.is-fullwidth
+            %tbody
+              %tr
+                %th Owner
+                %td
+                  = @item.user.givenname.to_s + ' ' + @item.user.sn.to_s
+              - unless @parents.blank?
+                %tr
+                  %th Parent Assets
+                  %td
+                    - @parents.each do |parent|
+                      = link_to "#{parent.name + ' (' + parent.serial + ')' }", parent, class: 'button'
+              %tr
+                %th Name
+                %td
+                  = @item.name
+              %tr
+                %th Manufacturer
+                %td
+                  = @item.manufacturer
+              %tr
+                %th Model
+                %td
+                  = @item.model
+              %tr
+                %th Serial
+                %td
+                  = @item.serial
+              %tr
+                %th Category
+                %td
+                  = @item.category.name
+              %tr
+                %th PO Number
+                %td
+                  = @item.po_number
+              %tr
+                %th Acquisition Date
+                %td
+                  = @item.acquisition_date.strftime("%d %B %Y") unless @item.acquisition_date.blank?
+              %tr
+                %th Purchase Price
+                %td
+                  = "£ " + @item.purchase_price.to_s
+              %tr
+                %th Condition
+                %td
+                  = render 'item_condition', item: @item
+              %tr
+                %th Storage Location
+                %td
+                  = @item.location
+              %tr
+                %th Peripherals
+                %td
+                  .buttons
+                    - unless @peripherals.blank?
+                      - @peripherals.each do |peripheral|
+                        = link_to "#{peripheral.name + ' (' + peripheral.serial + ')' }", peripheral, class: 'button'
+                    - if (current_user == @item.user) || can?(:manage, Item)
+                      = link_to add_peripheral_option_item_path, class: 'button is-link', id: 'add_peripheral' do
+                        %span.icon
+                          %i.fas.fa-plus
+              %tr
+                %th Comments
+                %td
+                  = @item.comment
+
+              - unless @item.retired_date.blank?
+                %tr
+                  %th Retired Date
+                  %td
+                    = @item.retired_date.strftime("%d %B %Y")
+
+      .field.is-horizontal
+        .field-body
+          - if can?(:manage, Item) || current_user == @item.user
+            .field.is-grouped.is-grouped-left
+              .control
+                - if @parents.blank?
+                  = link_to 'Edit', edit_item_path, class: 'button is-link'
+                - else
+                  = link_to 'Edit', edit_item_path(@item, is_peripheral: true), class: 'button is-link'
+          .field.is-grouped.is-grouped-right
+            .control
+              = link_to 'Back', items_path, class: 'button is-block is-light'
+            .control
+              = link_to 'Book or Reserve', new_item_booking_path(item_id: @item.id), class:'button is-link is-block'
+
+    %br
+    %br
+    - if @item.user == current_user || current_user.admin?
+      %p.title.has-text-centered Bookings History
+      %table#assets.table.is-striped.is-bordered
+        %thead
+          %tr
+            %th ID
+            %th Asset
+            %th Start Date-Time
+            %th End Date-Time
+            %th Location
+            %th Reason
+            %th Booked By
+            %th Status
+        %tbody
+          - @bookings.reverse_each do |booking|
+            %tr
+              %td.has-text-centered= booking.id
+              %td.has-text-centered= @item.name
+              %td.has-text-centered= booking.start_datetime.strftime("%d %b %Y - %I:%M %p")
+              %td.has-text-centered= booking.end_datetime.strftime("%d %b %Y - %I:%M %p")
+              %td.has-text-centered= booking.next_location
+              %td.has-text-centered= booking.reason
+              %td.has-text-centered= link_to booking.user.givenname, booking.user
+              %td.has-text-centered
+                = render 'bookings/booking_status', booking: booking

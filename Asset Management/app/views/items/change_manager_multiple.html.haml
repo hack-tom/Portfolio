@@ -1,0 +1,25 @@
+- content_for :title, "Transferring ownership"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .column.is-10.is-offset-1
+        %h3.title Transfer My Assets To...
+        .box
+          = simple_form_for @item, url: update_manager_multiple_items_path, method: :put do |f|
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Owner
+              .field-body
+                .field{style: 'margin: auto'}
+                  .control
+                    = f.hidden_field :item_id_list, value: params[:item_ids]
+                    = f.association :user, label: false, input_html: {class: 'select2'}, collection: @allowed_user.map { |u| [u.givenname, u.id] }, include_blank: false
+
+            .field.is-horizontal
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Cancel' , items_path, class: 'button is-light'
+                  .control
+                    = f.submit 'Save changes', class: 'button is-block is-success'

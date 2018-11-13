@@ -1,0 +1,64 @@
+- content_for :title, "Create category"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      - flash.each do |name, msg|
+        - next unless name == 'alert' || name == 'notice'
+        .columns
+          .column.is-4.is-offset-4
+            .notification.is-danger.has-text-centered
+              %button.delete
+              = msg
+
+      .column.is-10.is-offset-1
+        %h3.title Create category
+        .box
+          = simple_form_for(@category) do |f|
+            = f.error_notification
+
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Category
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :name, label: false, required: '', placeholder: 'Category', input_html: {class: 'input', maxlength: 50}
+                  %p.help Between 4-50 characters, characters allowed: alpha-numeric &_.,!()+=`,"@$#%*-
+
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Icon
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :icon, label: false, placeholder: 'Icon tag', input_html: {class: 'input'}
+                  %p.help
+                    Find an icon from the providers below, and copy their HTML tag. e.g. <strong>
+                    :escaped
+                      <i class="fas fa-edit"></i>
+                    </strong>
+                  %p.help
+                    = link_to 'Font Awesome', 'https://fontawesome.com/icons?d=gallery', target: :_blank
+                    or
+                    = link_to 'Material icons', 'https://material.io/icons/', target: :_blank
+
+
+            .field.is-horizontal
+              .field-label.is-normal
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :want_peripheral, as: :check_boxes, label: false  do
+                      = check_box_tag 'want_peripheral'
+                      %label{:for => "want_peripheral"} Create a peripheral category under this category
+            %br
+            .field.is-horizontal
+              .field-label.has-text-left
+                -#Left empty for spacing
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Cancel' , categories_path, class: 'button is-block is-light'
+                  .control
+                    = f.submit 'Create category', class: 'button is-block is-link'

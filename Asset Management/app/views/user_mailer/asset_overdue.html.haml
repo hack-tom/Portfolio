@@ -1,0 +1,62 @@
+!!!
+%html
+  %head
+    %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    = stylesheet_link_tag :email
+  %body
+    .mail-outer-box
+      .mail-transparent-box
+        .mail-logo
+        .mail-user-name
+          #{@user.givenname} #{@user.sn}
+      .inner-box
+        %h1.email-header-text
+          Your Booking Is Overdue
+        %h2.email-subheading-text
+          Your Booking for is overdue. Please return your items immediately.
+        %br
+        %hr
+        .body-box
+          %h2
+            Booking Information
+          .email-field
+            %h3.email-body-header
+              Start Time:
+            .email-body-text
+              #{@booking.bookings[0].start_datetime.strftime("%d/%m/%Y at %H:%M")}
+          .email-field
+            %h3.email-body-header
+              End Time:
+            .email-body-text
+              #{@booking.bookings[0].end_datetime.strftime("%d/%m/%Y at %H:%M")}
+          .email-field
+            %h3.email-body-header
+              Location:
+            .email-body-text
+              #{@booking.bookings[0].next_location}
+          .email-field
+            %h3.email-body-header
+              Reason:
+            .email-body-text
+              #{@booking.bookings[0].reason}
+
+          .email-field
+            %h3.email-body-header
+              Items:
+
+          %table.email-table{:cellspacing => "0", :width => "100%"}
+            %thead
+              %tr
+                %th ID
+                %th Asset
+                %th Serial
+              %tbody
+                - @booking.bookings.each do |b|
+                  %tr
+                    %td.has-text-centered= b.item.id
+                    %td.has-text-centered= link_to b.item.name, b.item
+                    %td.has-text-centered= b.item.serial
+        %br
+        %hr
+        %h2
+          Click #{link_to 'Here', bookings_url} to view more details

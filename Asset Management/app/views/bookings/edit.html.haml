@@ -1,0 +1,160 @@
+- content_for :title, "Edit Booking on #{@item.name}"
+
+%section.section
+  .container.is-desktop.has-text-centered
+    = render partial: 'layouts/flash'
+
+    %h3.title Edit booking on #{@item.name}
+    .box
+      .columns
+        - if @item.image?
+          .column.is-5.has-text-centered#zoom{style: 'margin: auto'}
+            = image_tag(@item.image.url, alt: 'Image')
+        -else
+          .column.is-5.has-text-centered{style: 'margin: auto'}
+            = image_tag("amrc.svg", width: "250", alt: 'Default Image, AMRC')
+        .column
+          %table.table.is-bordered.is-striped.is-fullwidth
+            %tbody
+              %tr
+                %th Owner
+                %td
+                  = @item.user.givenname.to_s + ' ' + @item.user.sn.to_s
+              - unless @parents.blank?
+                %tr
+                  %th Parent Assets
+                  %td
+                    - @parents.each do |parent|
+                      = link_to "#{parent.name + ' (' + parent.serial + ')' }", parent, class: 'button'
+              %tr
+                %th Name
+                %td
+                  = @item.name
+              %tr
+                %th Manufacturer
+                %td
+                  = @item.manufacturer
+              %tr
+                %th Model
+                %td
+                  = @item.model
+              %tr
+                %th Serial
+                %td
+                  = @item.serial
+              %tr
+                %th Category
+                %td
+                  = @item.category.name
+              %tr
+                %th PO Number
+                %td
+                  = @item.po_number
+              %tr
+                %th Acquisition Date
+                %td
+                  = @item.acquisition_date
+              %tr
+                %th Purchase Price
+                %td
+                  = "£ " + @item.purchase_price.to_s
+              %tr
+                %th Condition
+                %td
+                  = render 'items/item_condition', item: @item
+              %tr
+                %th Storage Location
+                %td
+                  = @item.location
+              %tr
+                %th Peripherals
+                %td
+                  - unless @peripherals.blank?
+                    - @peripherals.each do |peripheral|
+                      = link_to "#{peripheral.name + ' (' + peripheral.serial + ')' }", peripheral, class: 'button'
+
+      = simple_form_for @booking do |f|
+        .columns
+          .column
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Start Date
+              .field-body
+                .field.is-expanded
+                  .field.has-addons
+                    %p.control
+                      %a.button.is-static
+                        %i.far.fa-calendar-alt
+                    %p.control.is-expanded
+                      = f.input :start_date, as: :text, label: false, disabled: true, input_html: {class: 'input', style: 'resize:none', value: "#{@booking.start_date.strftime("%d %B %Y")}"}
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Start Time
+              .field-body
+                .field.is-expanded
+                  .field.has-addons
+                    %p.control
+                      %a.button.is-static
+                        %i.fas.fa-clock
+                    %p.control.is-expanded
+                      = f.input :start_time, as: :text, label: false, disabled: true, input_html: {class: 'input', style: 'resize:none', value: "#{@booking.start_time.strftime("%I:%M %p")}"}
+          .column
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label End Date
+              .field-body
+                .field.is-expanded
+                  .field.has-addons
+                    %p.control
+                      %a.button.is-static
+                        %i.far.fa-calendar-alt
+                    %p.control.is-expanded
+                      = f.input :end_date, as: :text, label: false, disabled: true, input_html: {class: 'input', style: 'resize:none', value: "#{@booking.end_date.strftime("%d %B %Y")}"}
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label End Time
+              .field-body
+                .field.is-expanded
+                  .field.has-addons
+                    %p.control
+                      %a.button.is-static
+                        %i.fas.fa-clock
+                    %p.control.is-expanded
+                      = f.input :end_time, as: :text, label: false, disabled: true, input_html: {class: 'input', style: 'resize:none', value: "#{@booking.end_time.strftime("%I:%M %p")}"}
+                      = f.hidden_field :item_id, value: @item.id
+                      = f.hidden_field :user_id, value: current_user.id
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Location
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :next_location, label: false, required: '', placeholder: 'Booking location', input_html: {class: 'input', type: 'text'}
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Reason
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :reason, label: false, placeholder: 'Reason', input_html: {class: 'input', type: 'text'}
+            - unless @peripherals.blank?
+              .field.is-horizontal
+                .field-label.is-normal
+                  %label.label Peripherals
+                .field-body
+                  .field
+                    %p.control.is-expanded
+                      - unless @booking.peripherals.blank?
+                        = f.input :peripherals, label: false, disabled: true, input_html: {class: 'input', value: "#{@booking.peripherals}"}
+
+            %br
+            %br
+            .field.is-horizontal
+              .field-label.has-text-left
+                -#Left empty for spacing
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Back', bookings_path, class: 'button is-block is-light'
+                  .control
+                    = f.submit 'Save changes', class: 'button is-success is-block'

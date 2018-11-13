@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    =stylesheet_link_tag :email
+  %body
+    .mail-outer-box
+      .mail-transparent-box
+        -# .mail-logo
+        -#   = image_tag(attachments['amrc_main.png'].url)
+        .mail-user-name
+          #{@manager.givenname} #{@manager.sn}
+      .inner-box
+        %h1.email-header-text
+          An Issue Has Beeen Reported With Your Item
+        %h2.email-subheading-text
+          #{@user.givenname} #{@user.sn} has logged an issue with #{@item.name}. You can see more information below.
+        %br
+        %hr
+        .body-box
+          %h2
+            Booking Information
+          .email-field
+            %h3.email-body-header
+              Item:
+            .email-body-text
+              #{@item.name}
+          .email-field
+            %h3.email-body-header
+              Serial:
+            .email-body-text
+              #{@item.serial}
+          .email-field
+            %h3.email-body-header
+              Condition:
+            .email-body-text
+              #{@item.condition}
+          .email-field
+            %h3.email-body-header
+              Notes:
+            .email-body-text
+              #{@item.condition_info}
+
+        %br
+        %hr
+        %h2
+          Click #{link_to 'Here', @item} to view the asset in the AMRC database.

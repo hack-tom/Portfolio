@@ -1,0 +1,30 @@
+- content_for :title, "Returning #{@item.name}"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .column.is-10.is-offset-1
+        %h3.title Returning #{@item.name}
+        .box
+          = simple_form_for @item, url: set_booking_returned_booking_path(@booking), method: :put do |f|
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label The Item Is...
+              .field-body
+                .field{style: 'margin: auto'}
+                  .control
+                    = f.select :condition, options_for_select(['Like New', 'Good', 'Adequate', 'Damaged', 'Missing'], @item.condition), {}, {class: 'select2'}
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Further Info...
+              .field-body
+                .field{style: 'margin: auto'}
+                  .control
+                    = f.input :condition_info, label: false, placeholder: 'Scratched and dented', input_html: {class: 'input'}
+            .field.is-horizontal
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Back', bookings_path, class: 'button is-light'
+                  .control
+                    = f.submit 'Return Item', class: 'button is-block is-success'

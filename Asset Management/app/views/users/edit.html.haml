@@ -1,0 +1,88 @@
+- content_for :title, "Editing #{@user.givenname} #{@user.sn}"
+
+%section.section
+  = render partial: 'layouts/flash'
+
+  .columns
+    .column.is-4.is-offset-4
+      %h1.title.has-text-centered{:id => "DetailsTitle"}
+        - if current_user.eql? @user
+          Edit My Details
+        - else
+          Edit #{@user.givenname} #{@user.sn}'s Details
+      .box
+        = simple_form_for @user do |f|
+          %label.label Username:
+          %p
+            #{@user.username}
+          %hr
+
+          %label.label Name:
+          %p #{@user.givenname} #{@user.sn}
+
+          %hr
+
+          %label.label Email:
+          %p
+            #{@user.email}
+
+          %hr
+
+          %label.label Phone:
+          .field.has-addons
+            %p.control
+              %a.button.is-static
+                +44
+            .field-body
+              .field
+                %p.control.is-expanded
+                  - if current_user.eql? @user
+                    = f.input :phone, label: false, placeholder: 'Phone', input_html: {class: 'input', type:'tel', id: 'number', maxlength: '10', value: "#{@user.phone}"}
+                  - else
+                    = f.input :phone, label: false, placeholder: 'Phone', input_html: {class: 'input', type:'tel', id: 'number', maxlength: '10', value: "#{@user.phone}", disabled: ''}
+          %p.help Do not enter the first zero
+
+          %hr
+
+          %label.label Department / Company:
+          %p
+            - if current_user.eql? @user
+              = f.input :ou, label: false, input_html: {class: 'input', value: "#{@user.ou}"}
+            - else
+              #{@user.ou}
+
+          %hr
+
+          %label.label Permission:
+          %p.control
+            - if can?(:manage, User)
+              .select
+                = f.select :permission_id, options_for_select(@options, @user.permission_id)
+            - else
+              - case @user.permission_id
+              - when 1
+                User
+              - when 2
+                Asset Manager
+              - else
+                Admin
+
+          %br
+          %br
+          .field.is-horizontal
+            .field-body
+              -# If user viewing his/her own details, unable to delete their own account
+              - unless current_user.eql? @user
+                .field.is-grouped.is-grouped-left
+                  %p.control
+                    = link_to @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+                      %span.icon
+                        %i.fas.fa-trash
+                      %span Delete
+                    = f.hidden_field :bunny, value: '0'
+              - else
+                .field-label.has-text-left
+                  -#Left empty for spacing
+              .buttons.is-right
+                = link_to 'Back', users_path, class: 'button is-block is-light'
+                = f.submit 'Save changes', class: 'button is-block is-success'

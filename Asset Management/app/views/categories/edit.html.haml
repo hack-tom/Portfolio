@@ -1,0 +1,46 @@
+- content_for :title, "Editing #{@category.name}"
+
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      = render partial: 'layouts/flash'
+      
+      .column.is-10.is-offset-1
+        %h3.title Editing #{@category.name}
+        .box
+          = simple_form_for(@category) do |f|
+            = f.error_notification
+
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Category
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :name, label: false, required: '', placeholder: 'Category', input_html: {class: 'input'}
+            .field.is-horizontal
+              .field-label.is-normal
+                %label.label Icon
+              .field-body
+                .field
+                  %p.control.is-expanded
+                    = f.input :icon, label: false, placeholder: 'Icon tag', input_html: {class: 'input'}
+                  %p.help
+                    Find an icon from the providers below, and copy their HTML tag. e.g. <strong>
+                    :escaped
+                      <i class="fas fa-edit"><i>
+                    </strong>
+                  %p.help
+                    = link_to 'Font Awesome', 'https://fontawesome.com/icons?d=gallery'
+                    or
+                    = link_to 'Material icons', 'https://material.io/icons/'
+            %br
+            .field.is-horizontal
+              .field-label.has-text-left
+                -#Left empty for spacing
+              .field-body
+                .field.is-grouped.is-grouped-right
+                  .control
+                    = link_to 'Cancel' , categories_path, class: 'button is-block is-light'
+                  .control
+                    = f.submit 'Save changes', class: 'button is-block is-success'

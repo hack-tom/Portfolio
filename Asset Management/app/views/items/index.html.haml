@@ -1,0 +1,56 @@
+- content_for :title, "Assets"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered
+    - if params[:category_name].blank?
+      All Assets
+    - else
+      Showing results for search term "#{params[:category_name]}"
+  - if can?(:create, Item)
+    .field.is-grouped{style: 'justify-content: center'}
+      %p.control
+        = link_to 'Create new', new_item_path, class: 'button is-success'
+      %p.control
+        = link_to 'Import', import_items_path, class: 'button is-info'
+
+  %table#assets.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Name
+        %th Image
+        %th Serial
+        %th Category
+        %th Manufacturer
+        %th Condition
+        %th Location
+        %th Status
+        %th.is-hidden Keywords
+    %tbody
+      - @items.each do |item|
+        %tr
+          %td.has-text-centered= link_to item.name, item
+          %td.has-text-centered
+            - if item.image?
+              = image_tag(item.image.url, width: '50', height: '50', alt: 'Image', style: 'vertical-align: middle; cursor: pointer', class: 'modal-button', data: {target: "modal-#{item.serial}"})
+              .modal{id: "modal-#{item.serial}"}
+                .modal-background
+                .modal-content
+                  = image_tag(item.image.url, width: '600', alt: 'Image', class: 'image-modal-image')
+                %button.modal-close.is-large{"aria-label" => "close"}
+            - else
+              = image_tag("amrc.svg", width: "50", alt: 'Default Image, AMRC', style: 'vertical-align: middle')
+          %td.has-text-centered= item.serial
+          %td.has-text-centered= item.category.name
+          %td.has-text-centered= item.manufacturer
+          %td.has-text-centered
+            = render 'item_condition', item: item
+          %td.has-text-centered= item.location
+          %td.has-text-centered
+            - if item.available?
+              %span.tag.is-success.is-medium Available
+            - else
+              %span.tag.is-danger.is-medium Booked
+          %td.has-text-centered.is-hidden= item.keywords

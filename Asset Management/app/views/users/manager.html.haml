@@ -1,0 +1,26 @@
+- content_for :title, "Asset Manager"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered Asset Managers
+  %table#users.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Action
+    %tbody
+      - @users.each do |user|
+        - unless user.user?
+          %tr
+            %td.has-text-centered= user.givenname.to_s + ' ' + user.sn.to_s
+            %td.has-text-centered= user.email
+            %td
+              .field.is-grouped.is-grouped-centered
+                %p.control
+                  = link_to manager_items_path(user_id: user.id), class: 'button is-primary' do
+                    %span.icon
+                      %i.fas.fa-eye
+                    %span View Assets

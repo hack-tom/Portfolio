@@ -1,0 +1,63 @@
+!!!
+%html
+  %head
+    %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    =stylesheet_link_tag :email
+  %body
+    .mail-outer-box
+      .mail-transparent-box
+        -# .mail-logo
+        -#   = image_tag(attachments['amrc_main.png'].url)
+        .mail-user-name
+          #{@manager.givenname} #{@manager.sn}
+      .inner-box
+        %h1.email-header-text
+          Booking Request
+        %h2.email-subheading-text
+          #{@user.givenname} #{@user.sn} has requested to book your assets. You can view more details for this booking below.
+        %br
+        %hr
+        .body-box
+          %h2
+            Booking Information
+          .email-field
+            %h3.email-body-header
+              Start Time:
+            .email-body-text
+              #{@booking.start_datetime.strftime("%d/%m/%Y at %H:%M")}
+          .email-field
+            %h3.email-body-header
+              End Time:
+            .email-body-text
+              #{@booking.end_datetime.strftime("%d/%m/%Y at %H:%M")}
+          .email-field
+            %h3.email-body-header
+              Location:
+            .email-body-text
+              #{@booking.next_location}
+          .email-field
+            %h3.email-body-header
+              Reason:
+            .email-body-text
+              #{@booking.reason}
+
+          .email-field
+            %h3.email-body-header
+              Items:
+
+          %table.email-table{:cellspacing => "0", :width => "100%"}
+            %thead
+              %tr
+                %th ID
+                %th Asset
+                %th Serial
+              %tbody
+                - @items.each do |item|
+                  %tr
+                    %td.has-text-centered= item.id
+                    %td.has-text-centered= link_to item.name, item
+                    %td.has-text-centered= item.serial
+        %br
+        %hr
+        %h2
+          Click #{link_to 'Here', requests_bookings_url} to view the request in full.

@@ -1,0 +1,21 @@
+unishef: &unishef
+  host: auth.shef.ac.uk
+  port: 389
+  attribute: uid
+  base: ou=Users,dc=sheffield,dc=ac,dc=uk
+  ssl: false
+
+development:
+  <<: *unishef
+
+test:
+  <<: *unishef
+
+qa:
+  <<: *unishef
+
+demo:
+  <<: *unishef
+
+production:
+  <<: *unishef

@@ -1,0 +1,27 @@
+- content_for :title, "My Favourites Category"
+
+%br/
+.container.is-fluid
+  = render partial: 'layouts/flash'
+
+  %p.title.has-text-centered My Favourites Category
+  %p.title.has-text-centered
+    = link_to 'Add new', new_user_home_category_path, class: 'button is-success'
+
+  %table#categories.table.is-striped.is-bordered
+    %thead
+      %tr
+        %th Category
+        %th Action
+    %tbody
+      - @user_home_categories.each do |user_home_category|
+        %tr
+          %td.has-text-centered
+            = user_home_category.category.name
+          %td
+            .field.is-grouped.is-grouped-centered
+              %p.control
+                = link_to user_home_category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+                  %span.icon
+                    %i.fas.fa-trash
+                  %span Remove
