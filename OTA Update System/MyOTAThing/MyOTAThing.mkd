@@ -1,0 +1,151 @@
+# Exercise 10: OTA update via GitHub
+
+## Design
+The following section describes the design of the OTA solution which will be implemented.
+
+### Updates - Automatic or Manual?
+It is well documented that people are terrible at updating their IoT devices and therefore firmware updates should be automatically provisioned at regular intervals. This means that users can take a hands-off approach to their IoT devices and let the firmware do all the work.
+
+However, whilst automatic OTA updates are great for ease of use user-experience, a bad build could brick a device or limit its functionality. This is undesirable, especially in a commercial environment where users have limited technical knowledge about their IoT devices and don't have the tools or ability to flash replacement firmware to their device. For this reason, perhaps updates should not be automatically installed, but instead the responsibility of updating devices should be delegated to the users themselves.  
+
+This design will focus on the second method, delegating responsibility for updating devices to users via a number of methods detailed below.
+
+### Web Provisioning
+Provisioning web-pages from an IoT device is a difficult task. Whilst we could manipulate a boilerplate HTML page which can be served to clients, this section proposes an alternative provisioning system, which uses a recursive data structure to model and compile a HTML page. Whilst the boilerplate is lightweight, writing web-pages with dynamic elements (such as a list of available access points) is not elegant and straightforward. Therefore, this system aims to provide a framework for the creation of web-pages with better malleability for IoT programmers.
+
+The recursive class CPP_PageNode (found in *libraries/*), describes the Document Object Model (DOM) of a page. Constructing objects of this class lets us define the DOM of a page in a top-down manner, in the same way one would write standard HTML.
+
+The class has the following attributes:
+
+**tag:** the HTML tag which the current node should express.
+
+**child_node:** a pointer to a CPP_PageNode which expresses a child element. E.g a node with tag <body> may have a child node with tag <p>
+
+**neighbor_node**  a pointer to a CPP_PageNode which expresses a neighboring element on the same level in the DOM representation. E.g a node with tag &lt;p>Heading 1&lt;/p> may have a neighbor node with tag &lt;p>Heading 2&lt;/p>
+
+**is_text_node:** A boolean which indicates whether a node is terminal in the object. If a node contains text only, we set this to true. When compiled to HTML, the class knows these nodes do not need terminating. When false, elements will be automatically terminated. This means that when writing a DOM, the author need not write closing tags for their HTML and the compiler does the work for them instead.
+
+The DOM is declared top-down, so the author must pass the constructor the node containing the HTML parent which this element is the child of *(see below)*. Alternatively, methods are provided to append nodes to the structure for more complicated models.
+
+For example the following code:
+
+```cpp
+// Top Down Definition of DOM
+CPP_PageNode* html_node = new CPP_PageNode("<html>", false) ;
+  CPP_PageNode* head_node = new CPP_PageNode("<head>", false, html_node);
+  CPP_PageNode* body_node = new CPP_PageNode("<body>", false, html_node);
+    CPP_PageNode* heading_node = new CPP_PageNode("<h1>", false, body_node);
+      CPP_PageNode* heading_text_node = new CPP_PageNode("ESP32 Menu:", true, heading_node);
+    CPP_PageNode* ul_options_node = new CPP_PageNode("<ul>", false, body_node);
+        CPP_PageNode* li_1_node = new CPP_PageNode("<li>", false, ul_options_node);
+          CPP_PageNode* li_1_text_node = new CPP_PageNode("<a href = '/netstat'>Network  Status</a>", true, li_1_node);
+        CPP_PageNode* li_2_node = new CPP_PageNode("<li>", false, ul_options_node);
+          CPP_PageNode* li_2_text_node = new CPP_PageNode("<a href = '/fwupdate'>OTA Update</a>", true, li_2_node);
+        CPP_PageNode* li_3_node = new CPP_PageNode("<li>", false, ul_options_node);
+          CPP_PageNode* li_3_text_node = new CPP_PageNode("<a href = '/netselect'> Select Network </a>", true, li_3_node);
+```
+
+Would create a structure which looks like:
+
+![picture alt](ExampleCPPPaggeNode.png "CPP_PageNode Structure")
+
+
+
+When the *draw_me_and_my_child()* method is called, the chosen node and all of its children and neighbours will be compiled into a char[] of HTML code which looks as follows:
+
+![picture alt](ExampleCPPPaggeNodeHTML.png "CPP_PageNode Structure In HTML")
+
+We can then call the following method to recursively turn a structure into a string.  
+```cpp
+draw_me_and_my_child();
+```
+From here we can convert the string formed to a char[] (cstr) and subsequently pass it to the send method.  
+```cpp
+server.send(200, "text/html", cstr);
+```
+
+To conclude. This webpage provisioning system makes it faster and more intuitive for IoT programmers to author webpages, without needing to manipulate boilerplates. The class allows for more malleable pages at minimal extra memory cost.
+
+### Update Methods
+The proposed implementation gives the user two different ways of updating their IoT device. Many IoT devices, are placed in locations which an engineer may not be able to access for day-to day maintenance, this location may be geographically remote, or the device may just be embedded in a hard to reach location (e.g. above a busy
+entrance to a building). As a result, it is important to provide a remote means of maintaining IoT devices, such that the person in control need not always be physically present.
+
+However, it was also decided that the device should have a physical means of checking for and performing updates for the sake of redundancy and reliability. The sections below discuss these two methods in further detail.
+
+#### OTA Via Web Client
+A web client would provide a user-friendly and accessible way for people to update their firmware. The user connects to the device's access point and a captive portal takes them to the update utility. This is ideal in the case where the user cannot physically access the device as it is geographically remote or embedded.
+
+OTA via a web client will involve setting up the device, such that it can simultaneously act as both a station/client and an access point. To perform an OTA Update there are then three requirements:
+
+1. The user must be able to connect to a WiFi network of choice - hardcoding WiFi credentials is not viable in a commercial system, as everybody has different network configurations.  
+2. A GUI must be provided for updating - This webpage should list the user's current version and the latest available version of the device firmware. Offering links to download the firmware from various sources.
+3. The update utility should give the user the ability to choose what source the IoT device should update from.
+
+It is important that a secure method of downloading updates is provided, as a result, the OTA utility should recommend, downloading the .bin firmware file from GitHub, using HTTPS/TLS. An alternative system, for redundancy, should also offer the user a way of downloading the firmware from the unsecured gate.ac.uk server provided in the lab notes. These two variants are discussed in detail below.
+
+It should be noted that an ideal solution would let users specify their own download server for updates, providing security in the case that the firmware vendor's servers become unavailable. This is responsible design, lets open-source programmers keep devices secure in the case where a vendor no-longer has the ability to support a system. In the interest of time, this feature has not been implemented but would enhance long-term security in a real-life system.
+
+#### OTA Via Push Button
+OTA by push button lets the user check for an install updates using a push button on the device itself. When the button has been held for a set number of seconds (to avoid accidental presses), the system should check for an update and if available, perform that update.
+
+An on-board control for updates ensures that so long as a button is connected, the user can perform an update. This is useful if the user is in close proximity to the device, or in the case where a previous update breaks the web-update utility and the on-board reset does not fix this and the user needs a secondary update method to fall back on.
+
+A flowchart for the update procedure can be found below:
+
+![picture alt](CheckButtonPressLoop.png "Checking Button Press for OTA")
+
+
+### Factory Reset
+It is feasible that a vendor could release a firmware update which breaks a critical part of the IoT device's firmware. As a result, the device should have the stock binary firmware pre-loaded into the SPIFFS file system aboard the ESP32 (uploaded to SPIFFS using https://github.com/me-no-dev/arduino-esp32fs-plugin). When a reset button attached to the device is held for a length of time, this firmware should be loaded from SPIFFS and the firmware loaded by the bootloader should be replaced with this file.
+
+The factory reset button procedure could take two forms. The first form would allow for a factory reset at any point during runtime. During the main device loop, we could check if the button has been held more than a set number of seconds (as for the OTA via push button above). Alternatively, a factory reset could be performed by holding the button down when the device is first turned on. This second method is advantageous as it requires an extra layer of effort to reset the device, and a random passer-by holding the button will not trigger the update, as with the first proposed method. As a result, the second design will be implemented - its less user friendly, but less likely to be accidentally used.
+
+### Physical Security Features
+As discussed above, a push button must be used to check for firmware updates. This reduces the chances of the device updating to a bad firmware build and means the update must be manually activated by the user.
+
+Sometimes vendors push bad firmware and if the system were to automatically update, the device could brick. This system partially negates this problem, as it gives the owner a chance to check out changelogs and reports from other users, before upgrading to the next firmware version.
+
+It is well documented that owners of IoT devices are not very good at updating them. Whilst we do not want these devices to automatically update, we can still remind the user that there are updates to be done. For this reason, our design includes an on-board light, which remains lit when a new firmware version is available.
+
+### Transmission Security Features
+The provided repository storing the binary files @gate.ac.uk does not use https, so it is impossible to create a secure connection to this site. The design includes a way for the user to download firmware from this server, but it is by no means the best solution as it is susceptible to man in the middle attacks.
+
+As a result, we instead connect to the server using https. In the code, we store the certificate of the host site we will be connecting to. This can be found in the variable root_ca, stored as a character array. When connecting to the host, we check that the certificate it provides matches the one we have stored in the code. We also need to check that this certificate is signed. Encrypted packets are then sent to the IoT device from the server and decoded. The HTTPClient and WiFiClientSecure libraries deal with most of this for us.
+
+Ideally, user should also be able to change the access point's password from the default so that it is harder for intruders to tamper with the device's connection and update settings.  
+
+### Changeable AP Password
+Setting a default, unchangeable password for the SoftAP is a bad idea as it means anyone who knows the default password can control your IOT device. Therefore the web portal will include a system which lets users change the password for the SoftAP. When the user initiates an update, these credentials will have to be backed up to a file in SPIFFS, so that the user does not return to the default credentials after an update.
+
+## Transferring Data Across Firmware Versions
+Before updating, the software should store a user's chosen external network and AP credentials and temporarily store these in SPIFFS. Once the new firmware has been installed, this file should be pulled from storage and the user's network credentials should be restored.
+
+## Implementation
+### Design Changes
+In the interest of time, a few features needed to be omitted from the design. Firstly, there is no system in place to let the user store custom network or AP credentials across a firmware update. Ideally, a file containing these two pieces of data would be saved to SPIFFS, however I was not able to implement this feature before the deadline. In a real system, the security implications of this would be relatively low, as we're just resetting to the default password. Losing the details of the network a user was connected to is also frustrating and not viable in a real world system. With more time, this feature would have been the priority.
+
+Upon implementation, the decision was made to change the triggering system for a factory reset, in the interest of usability. Whilst we don't want to make it too easy for a user to factory reset the device, neither should it be impossible. I experimented with using a button press at start-up and during the loop for the loop and while it was possible to perform this check at start-up, having to disconnect and reconnect the device from power and simultaneously press the reset button was difficult. Therefore, a factory reset is instead triggered by holding the button on the device for 15 seconds after start-up.
+
+
+## Testing
+### Debugging Framework
+A debugging framework has been implemented so that it is easy to follow the program at runtime and whilst developing. This framework is modular such that we can comment out certain types of debug messages which do not currently
+concern us.
+
+This structure defines seven types of debug message:
+1. startupDBG - Information about startup.
+2. loopDBG - Things which are checked in the loop.
+3. networkDBG - Setup of network.
+4. cloudDBG - Fetching things to and from GATE/GitHub
+5. otaDBG - Messages to do with the OTA functions
+6. factoryDBG - Messages about factory reset.
+7. serverDBG - Messages about the web server.
+
+This structure helped to test the code during development as it made it possible to enable and disable messages as they appeared throughout the program and
+helped to reduce the time it took to locate a bug by following the programmer defined error messages.
+
+### Informal Testing
+Each feature of the solution has been informally tested to test for edge cases. For example, the code has been tested to check that the IoT device can
+recover from the firmware server being unavailable and likewise was tested to ensure that the device would still have limited functionality when not
+connected to a network. Where possible, functions return boolean values or some indication of whether they were successful in tasks, meaning issues can be "caught"
+and the user can be notified either by the webpage or serial line.
