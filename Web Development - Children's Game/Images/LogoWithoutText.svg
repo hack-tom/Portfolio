@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#XMLID_9_);stroke:#383F51;stroke-miterlimit:10;}
+	.st1{opacity:0.7;fill:url(#XMLID_10_);stroke:#383F51;stroke-miterlimit:10;}
+	.st2{opacity:0.3;}
+	.st3{filter:url(#Adobe_OpacityMaskFilter);}
+	.st4{mask:url(#XMLID_11_);}
+	.st5{fill:#FFFFFF;}
+	.st6{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+</style>
+<g id="XMLID_3_">
+	<radialGradient id="XMLID_9_" cx="128.125" cy="128.5" r="127.5" gradientUnits="userSpaceOnUse">
+		<stop  offset="0.8473" style="stop-color:#383F51"/>
+		<stop  offset="0.862" style="stop-color:#444A5B"/>
+		<stop  offset="0.8903" style="stop-color:#555B6A"/>
+		<stop  offset="0.9113" style="stop-color:#5B616F"/>
+		<stop  offset="0.9606" style="stop-color:#92969F"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</radialGradient>
+	<circle id="XMLID_6_" class="st0" cx="128.1" cy="128.5" r="127.5"/>
+	<g id="XMLID_4_">
+		
+			<radialGradient id="XMLID_10_" cx="85.7608" cy="76.3594" r="220.7459" fx="69.5753" fy="61.0103" gradientUnits="userSpaceOnUse">
+			<stop  offset="0" style="stop-color:#383F51"/>
+			<stop  offset="0.3468" style="stop-color:#3A4153"/>
+			<stop  offset="0.4717" style="stop-color:#414759"/>
+			<stop  offset="0.5608" style="stop-color:#4C5363"/>
+			<stop  offset="0.6328" style="stop-color:#5D6372"/>
+			<stop  offset="0.6945" style="stop-color:#737885"/>
+			<stop  offset="0.7491" style="stop-color:#8F939D"/>
+			<stop  offset="0.7985" style="stop-color:#AFB2B9"/>
+			<stop  offset="0.8425" style="stop-color:#D3D5D9"/>
+			<stop  offset="0.883" style="stop-color:#FCFCFD"/>
+			<stop  offset="0.8854" style="stop-color:#FFFFFF"/>
+			<stop  offset="0.9838" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#FFFFFF"/>
+		</radialGradient>
+		<circle id="XMLID_5_" class="st1" cx="128.1" cy="128.5" r="127.5"/>
+		<g id="XMLID_7_" class="st2">
+			<defs>
+				<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0.1" y="0.5" width="231.2" height="231.2">
+					<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+					<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+				</filter>
+			</defs>
+			<mask maskUnits="userSpaceOnUse" x="0.1" y="0.5" width="231.2" height="231.2" id="XMLID_11_">
+				<g id="XMLID_22_" class="st3">
+					
+						<image style="overflow:visible;" width="236" height="236" id="XMLID_23_" xlink:href="F72DED16.jpg"  transform="matrix(1 0 0 1 -2 -2)">
+					</image>
+				</g>
+			</mask>
+			<g id="XMLID_21_" class="st4">
+				<path id="XMLID_25_" class="st5" d="M21.8,149.7c0-70.4,57.1-127.5,127.5-127.5c29.8,0,57.2,10.2,78.9,27.4
+					C204.9,20,168.7,1,128.1,1C57.7,1,0.6,58.1,0.6,128.5c0,40.6,19,76.8,48.6,100.1C32,206.9,21.8,179.5,21.8,149.7z"/>
+				<path id="XMLID_24_" class="st6" d="M21.8,149.7c0-70.4,57.1-127.5,127.5-127.5c29.8,0,57.2,10.2,78.9,27.4
+					C204.9,20,168.7,1,128.1,1C57.7,1,0.6,58.1,0.6,128.5c0,40.6,19,76.8,48.6,100.1C32,206.9,21.8,179.5,21.8,149.7z"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

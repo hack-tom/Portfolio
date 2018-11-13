@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="author" content="Alex Chapman">
+		<title>Reviews</title>
+		<link rel="stylesheet" href="reset.css"/>
+		<link rel="stylesheet" href="main.css"/>		
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400,500,700" rel="stylesheet"> 		
+		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+		<script src="javascript/responsivebar.js"></script> 
+	</head>
+
+
+	<body>
+		<!-- Header containing main navbar-->
+		<header id=banner>
+				<!--Navbar container for logo and links on navbar-->
+				<nav class="navbartop">
+					<!--Both mobile and desktop logo variants are loaded to page at once
+					hidden or shown using a screen size dependent media query.-->
+					<img src="Images/LogoWithText.svg" id="navbarlogodesktop" alt="Site logo- A bubble with text reading The Playground.">
+					<img src="Images/LogoWithoutText.svg" id="navbarlogomobile" alt="Site logo- A bubble">	
+					<!--List of navbar links.-->
+					<ul class="navbar" id="MainNav">
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="founders.html">Founders</a>
+						</li>
+						<li>
+							<a href="reviews.html">Reviews</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Games</a>
+						</li>
+						<li>
+							<a href="contact.html">Contact</a>
+						</li>
+						<li>
+							<a href="accessibility.html">Accessibility</a>
+						</li>
+						<!--Icon for mobile list is included in unordered list. 
+						Enabled using screen size dependent media query.-->
+						<li class="navbaricon">
+							<a href="javascript:void(0);" onclick="dropdownMenu()">Menu</a>
+						</li>
+					</ul>
+				</nav>
+		</header>
+		
+
+		
+		<main class="MainContent">
+		<h1 class="pageheader">Reviews</h1>
+			<h2 class = "cardheading ReviewsSubsectionHeader">Testemonials</h2>
+			<!--Flex container for an individual testemonial-->
+			<div class="ResponsiveFullCard">
+				<!--Wrapper for figure containing image of the customer giving a testemonial.-->
+				<div class="founderimg">
+					<figure>
+						<!--Image of company founder. Displayed in bordered semi-circle (see styling)-->
+						<img src="Images/Reviews/Customer1.png" alt="Image of customer.">
+					</figure>
+				</div>
+					<!--Article containing a testemonial from a customer-->
+				<article class="founderdetails">
+					<!--Header with name of the product being reviewed-->
+					<h2 class="cardheading">Sliding Blocks Puzzle</h2>
+					<!--Smaller header with the name of the customer giving a testemonial-->
+					<h3 class="cardsubheading">Janet Smith - Parent</h3>
+					<!--Quote from customer about the product being reviewed-->
+					<q class="pagegenerictext">
+						"The puzzle is really great fun. My child spends hours playing this game. The game has an easy introduction
+						but quickly becomes much harder and interesting by introducting new types of blocks and a time limit. 
+						Overall great stuff!"						
+					</q>
+				</article>
+			</div>	
+			
+			<div class="ResponsiveFullCard">
+				<div class="founderimg">
+					<figure>
+						<img src="Images/Reviews/Customer2.png" alt="Image of customer.">
+					</figure>
+				</div>
+				<article class="founderdetails">
+					<h2 class="cardheading">The Playground - Educational Package</h2>
+					<h3 class="cardsubheading">Lisa Norman - Teacher</h3>
+					<q class="pagegenerictext">
+						"I use The Playgroun's educational pack in my lessons each and every day. The games on offer are
+						unique and engaging and the students love it. Since beginning to use Playground's products we've seen
+						grades increase across the board. Fantastic!"						
+					</q>
+				</article>
+			</div>	
+			
+			<!--Flexbox container for links to other websites-->
+			<div class="MainContent" id="ResponsiveReviewsCards">
+				<!--Header to tell the user what content this section contains.-->
+				<h2 class = "cardheading ReviewsSubsectionHeader">Useful Links</h2>
+				<!--Flexbox containing a link, image and description of an external website which the user
+				may wish to visit.-->
+				<div class="ResponsiveThreeCard ThreeCardReviews">
+					<!--Header image for the website to be linked to, uses company logo (see accessibility page 
+					for list of image sources.)-->
+					<img src="http://a.files.bbci.co.uk/cbbc/www/assets/dd998d1/images/channel-banner/logo.png" class="ReviewLinkImage" alt="CBeebies Logo">
+					<!--Anchor to hyperlink webpage title and descriptive text-->
+					<a href="" class="reviewscardtext">
+						<!--Header to tell user the name of the website being linked to-->
+						<h3 class= "cardheading">CBeebies</h3>
+						<!--Short description of the website being linked to-->
+						<p class="pagegenerictext">
+							A fun site for children featuring games and videos, created by the BBC.
+						</p>
+					</a>
+				</div>
+				<!--Flexbox containing a link, image and description of an external website which the user
+				may wish to visit.-->			
+				<div class="ResponsiveThreeCard ThreeCardReviews">
+					<img src="Images/Reviews/MattelLogo.png" class="ReviewLinkImage" alt="Mattel Logo">
+					<a href="http://play.mattel.com/" class="reviewscardtext">
+						<h3 class= "cardheading">Mattel</h3>
+						<p class="pagegenerictext">
+							Mattel have created a fun site filled with a range of children's educational games.
+						</p>
+					</a>
+				</div>	
+				<!--Flexbox containing a link, image and description of an external website which the user
+				may wish to visit.-->
+				<div class="ResponsiveThreeCard ThreeCardReviews">
+					<img src="Images/Reviews/BrainPopLogo.png" class="ReviewLinkImage" alt="Brain POP Logo">
+					<a href="http://www.brainpop.co.uk/" class="reviewscardtext">
+						<h3 class= "cardheading">Brain POP</h3>
+						<p class="pagegenerictext">
+							Brain POP has created a number of games, animations and videos for children. 
+							The site offers a range of activities which will keep you entertained for ages!
+						</p>
+					</a>
+				</div>
+			</div>
+			<!--Disclaimer notice for users with link to list of resources used on website.-->
+			<p class="pagegenerictext disclaimertext">
+			Third party logos found on this page are used in accordance with fair use law. All persons on this page are fictional.
+			For image sources please <a href="accessibility.html">click here</a>.
+			<p>
+		</main>
+		<!--Footer containing page decorative art.-->
+		<footer id="site-footer">
+			<!--Page bottom border decorative art.-->
+			<img src="Images/footer.svg" id="footerimage" alt="Page decorative footer image showing cartoon trees">
+			<!--Script to resize footer to match border art height-->
+			<script src="javascript/footerarea.js"></script> 
+		</footer>
+	</body>
+</html>

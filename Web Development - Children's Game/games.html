@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="author" content="Alex Chapman">
+		<title>Games</title>
+		<link rel="stylesheet" href="reset.css"/>
+		<link rel="stylesheet" href="main.css"/>		
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400,500,700" rel="stylesheet"> 		
+		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+		<script src="javascript/responsivebar.js"></script> 
+	</head>
+
+
+	<body>
+<!-- Header containing main navbar-->
+		<header id=banner>
+				<!--Navbar container for logo and links on navbar-->
+				<nav class="navbartop">
+					<!--Both mobile and desktop logo variants are loaded to page at once
+					hidden or shown using a screen size dependent media query.-->
+					<img src="Images/LogoWithText.svg" id="navbarlogodesktop" alt="Site logo- A bubble with text reading The Playground.">
+					<img src="Images/LogoWithoutText.svg" id="navbarlogomobile" alt="Site logo- A bubble">	
+					<!--List of navbar links.-->
+					<ul class="navbar" id="MainNav">
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="founders.html">Founders</a>
+						</li>
+						<li>
+							<a href="reviews.html">Reviews</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Games</a>
+						</li>
+						<li>
+							<a href="contact.html">Contact</a>
+						</li>
+						<li>
+							<a href="accessibility.html">Accessibility</a>
+						</li>
+						<!--Icon for mobile list is included in unordered list. 
+						Enabled using screen size dependent media query.-->
+						<li class="navbaricon">
+							<a href="javascript:void(0);" onclick="dropdownMenu()">Menu</a>
+						</li>
+					</ul>
+				</nav>
+		</header>
+		
+		<!--Page header -->
+		<div class="pageheader">
+			<h1>Our Games</h1>
+		</div>
+		
+		<!--Wrapper for content on page. Allows boxes to behave flexibly-->	
+		<main class="MainContent" id="GamesMainConent">
+			<!--Uses square flexboxes which are displayed in a column on mobile devices but scale
+			up and display in rows of two and three as screen width increases.-->
+			<!--Card containing information about an individual game.-->
+			<div class="ResponsiveThreeCard">
+				<!--Outer class used for correctly positioning overlaid text when the user hovers over a div of this type.-->
+				<div class="HoverCard">
+				<!--Outer class used for correctly positioning overlaid text on hover.-->
+				<img class="HoverImage" src="Images/Games/CardArt1.svg" alt="Playing cards faced down, With one pair faced upwards.">
+						<!--Links all text in div to the -->
+						<a class="HoverInfo" href="playablegame.html">
+						<!--Title and description of a game.-->
+						<h2>Match The Pairs</h2>
+						<p>In this puzzle you must click the matching cards to form sets of pairs. Matching sets of cards
+						will award you with points. How many tries will it take you to complete the puzzle successfully?
+						</p>
+						</a>
+				</div>
+			</div>
+			
+			<!--Card containing information about an individual game.-->
+			<div class="ResponsiveThreeCard">
+				<div class="HoverCard">
+				<img class="HoverImage" src="Images/Games/CardArt2.svg" alt="Claw machine game. Surrounded by mathematical symbols.">
+						<a class="HoverInfo" href="">
+						<h2>Claw Game<br>(Coming Soon)</h2>
+						<p>Move the claw to grab prizes from the machine. This game requires quick reactions and sharp wits
+						win prizes and collect coins to gain points. Use these points to upgrade your score.
+						</p>
+						</a>
+				</div>
+			</div>			
+
+			<!--Card containing information about an individual game.-->
+			<div class="ResponsiveThreeCard">
+				<div class="HoverCard">
+				<img class="HoverImage" src="Images/Games/CardArt3.svg" alt="Diagram of a multiple colored blocks arranged to form a puzzle.">
+						<a class="HoverInfo" href="">
+						<h2>Sliding Blocks<br>(Coming Soon) </h2>
+						<p>Slide the blocks in turn to match the final pattern on the screen. Compete for the high score and 
+						challenge your friends. Alternatively play alone, against a timer or in a maximum number of moves.
+						</p>
+						</a>
+				</div>
+			</div>
+			
+			<!--Card containing information about an individual game.-->
+			<div class="ResponsiveThreeCard">
+				<div class="HoverCard">
+				<img class="HoverImage" src="Images/Games/CardArt4.svg" alt="Top down view of cartoon carpark, with a car trying to park">
+						<a class="HoverInfo" href="">
+						<h2>Spot The Difference<br>(Coming Soon)</h2>
+						<p>Spot the difference between the two pictures displayed on screen. Find all the changes as fast as possible to
+						score maximum points. Play against friends and challenge each other to reaching the high score. 
+						</p>
+						</a>
+				</div>
+			</div>			
+			
+			<!--Card containing information about an individual game.-->
+			<div class="ResponsiveThreeCard">
+				<div class="HoverCard">
+				<img class="HoverImage" src="Images/Games/CardArt5.svg" alt="Top down view of car park with a slight variation over previus image.">
+						<a class="HoverInfo" href="">
+						<h2>Parking Game<br>(Coming Soon)</h2>
+						<p>Park the cars in the correct spaces in the allotted time period. Score points and compete agains your friendsfor 
+						the high score. Also take part in multiplayer games against other players to see who can achieve the highest score.
+						</p>
+						</a>
+				</div>
+			</div>	
+
+			<!--Card containing information about an individual game.-->
+			<div class="ResponsiveThreeCard">
+				<div class="HoverCard">
+				<img class="HoverImage" src="Images/Games/CardArt6.svg" alt="Picture of slot machine display alongside playing cards, dice and poker chips.">
+						<a class="HoverInfo" href="">
+						<h2>Slot Machine<br>(Coming Soon)</h2>
+						<p>Spin the wheel and win points and prizes. Matching the correct sequences awards bonus points. Spin the wheel and
+						try to get the best score.
+						</p>
+						</a>
+				</div>
+			</div>		
+		</main>
+	
+		<!--Footer containing page decorative art.-->
+		<footer id="site-footer">
+			<!--Page bottom border decorative art.-->
+			<img src="Images/footer.svg" id="footerimage">
+			<!--Script to resize footer to match border art height-->
+			<script src="javascript/footerarea.js"></script> 
+		</footer>
+	</body>
+</html>

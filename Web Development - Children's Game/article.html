@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="author" content="Alex Chapman">
+		<title>Article</title>
+		<link rel="stylesheet" href="reset.css"/>
+		<link rel="stylesheet" href="main.css"/>		
+		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400,500,700" rel="stylesheet"> 		
+		<script src="javascript/responsivebar.js"></script> 
+	</head>
+
+
+	<body>
+		<!-- Header containing main navbar-->
+		<header id=banner>
+				<!--Navbar container for logo and links on navbar-->
+				<nav class="navbartop">
+					<!--Both mobile and desktop logo variants are loaded to page at once
+					hidden or shown using a screen size dependent media query.-->
+					<img src="Images/LogoWithText.svg" id="navbarlogodesktop" alt="Site logo- A bubble with text reading The Playground.">
+					<img src="Images/LogoWithoutText.svg" id="navbarlogomobile" alt="Site logo- A bubble">	
+					<!--List of navbar links.-->
+					<ul class="navbar" id="MainNav">
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="founders.html">Founders</a>
+						</li>
+						<li>
+							<a href="reviews.html">Reviews</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Games</a>
+						</li>
+						<li>
+							<a href="contact.html">Contact</a>
+						</li>
+						<li>
+							<a href="accessibility.html">Accessibility</a>
+						</li>
+						<!--Icon for mobile list is included in unordered list. 
+						Enabled using screen size dependent media query.-->
+						<li class="navbaricon">
+							<a href="javascript:void(0);" onclick="dropdownMenu()">Menu</a>
+						</li>
+					</ul>
+				</nav>
+		</header>
+		
+		<!--Wrapper for page content. Used for spacing and margins.-->
+		<div id="MainContent">
+			<!--Article semantic element used to separate contain all of the media for a single specific -->
+			<article id="SinglePageArticle">
+				<!--Figure containing an image to be used as the main image the user sees when article is first loaded.-->
+				<figure id="MainImage">
+					<img src="Images/Article/PlaceholderImage.png" alt="This is a placeholder image">
+				</figure>
+				<!--Article heading styled using standard heading style.-->
+				<h1 class="cardheading">This is a title</h1>
+				<!--Article subheading using generic subheading style used across the site-->
+				<h2 class="cardsubheading">This is a subtitle</h2>
+				<!--A generic paragraph of site text displayed as a block-->
+				<p class="pagegenerictext">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem quam, gravida sit amet tempor 
+				non, interdum id leo. Integer bibendum velit id tempus pharetra. Nunc fermentum tellus elementum, 
+				interdum quam a, auctor lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+				fames ac turpis egestas. Sed eget vehicula diam. Duis eu tristique libero, sit amet sollicitudin 
+				libero. Nunc facilisis felis a quam imperdiet interdum quis ac mi. Nullam tristique metus vitae 
+				ipsum vehicula, in finibus justo euismod. Proin vel facilisis lorem, at hendrerit velit. 
+				</p>
+				<!--Figure displayed inline in text, floated right with text wrapping around, with equal spacing.-->
+				<figure class="FigureInArticle">
+					<img src="Images/Article/PlaceholderImage.png" alt="This is a placeholder image in a figure in text.">
+					<figcaption>This image is a placeholder</figcaption>
+				</figure>
+				<p class="pagegenerictext">
+				Nam ornare orci sit amet ultrices eleifend. Aenean congue sem et tortor lacinia accumsan. Nunc quis dui enim. 
+				Vestibulum ullamcorper, leo in fringilla cursus, velit velit pellentesque ipsum, eu ullamcorper 
+				massa massa sit amet metus. Proin non erat feugiat, commodo nulla vel, pretium ex. Nullam gravida 
+				feugiat auctor.
+				</p>
+				<p class="pagegenerictext">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem quam, gravida sit amet tempor 
+				non, interdum id leo. Integer bibendum velit id tempus pharetra. Nunc fermentum tellus elementum, 
+				interdum quam a, auctor lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+				fames ac turpis egestas. Sed eget vehicula diam. Duis eu tristique libero, sit amet sollicitudin 
+				libero. Nunc facilisis felis a quam imperdiet interdum quis ac mi. Nullam tristique metus vitae 
+				ipsum vehicula, in finibus justo euismod. Proin vel facilisis lorem, at hendrerit velit. Nam ornare 
+				orci sit amet ultrices eleifend. Aenean congue sem et tortor lacinia accumsan. Nunc quis dui enim. 
+				Vestibulum ullamcorper, leo in fringilla cursus, velit velit pellentesque ipsum, eu ullamcorper 
+				massa massa sit amet metus. Proin non erat feugiat, commodo nulla vel, pretium ex. Nullam gravida 
+				feugiat auctor.
+				</p>
+				<p class="pagegenerictext">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem quam, gravida sit amet tempor 
+				non, interdum id leo. Integer bibendum velit id tempus pharetra. Nunc fermentum tellus elementum, 
+				interdum quam a, auctor lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+				fames ac turpis egestas. Sed eget vehicula diam. Duis eu tristique libero, sit amet sollicitudin 
+				libero. Nunc facilisis felis a quam imperdiet interdum quis ac mi. Nullam tristique metus vitae 
+				ipsum vehicula, in finibus justo euismod. Proin vel facilisis lorem, at hendrerit velit. Nam ornare 
+				orci sit amet ultrices eleifend. Aenean congue sem et tortor lacinia accumsan. Nunc quis dui enim. 
+				Vestibulum ullamcorper, leo in fringilla cursus, velit velit pellentesque ipsum, eu ullamcorper 
+				massa massa sit amet metus. Proin non erat feugiat, commodo nulla vel, pretium ex. Nullam gravida 
+				feugiat auctor.
+				</p>
+				<p class="pagegenerictext">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem quam, gravida sit amet tempor 
+				non, interdum id leo. Integer bibendum velit id tempus pharetra. Nunc fermentum tellus elementum, 
+				interdum quam a, auctor lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+				fames ac turpis egestas. Sed eget vehicula diam. Duis eu tristique libero, sit amet sollicitudin 
+				libero. Nunc facilisis felis a quam imperdiet interdum quis ac mi. Nullam tristique metus vitae 
+				ipsum vehicula, in finibus justo euismod. Proin vel facilisis lorem, at hendrerit velit. Nam ornare 
+				orci sit amet ultrices eleifend. Aenean congue sem et tortor lacinia accumsan. Nunc quis dui enim. 
+				Vestibulum ullamcorper, leo in fringilla cursus, velit velit pellentesque ipsum, eu ullamcorper 
+				massa massa sit amet metus. Proin non erat feugiat, commodo nulla vel, pretium ex. Nullam gravida 
+				feugiat auctor.
+				</p>
+				<p class="pagegenerictext">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem quam, gravida sit amet tempor 
+				non, interdum id leo. Integer bibendum velit id tempus pharetra. Nunc fermentum tellus elementum, 
+				interdum quam a, auctor lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+				fames ac turpis egestas. Sed eget vehicula diam. Duis eu tristique libero, sit amet sollicitudin 
+				libero. Nunc facilisis felis a quam imperdiet interdum quis ac mi. Nullam tristique metus vitae 
+				ipsum vehicula, in finibus justo euismod. Proin vel facilisis lorem, at hendrerit velit. Nam ornare 
+				orci sit amet ultrices eleifend. Aenean congue sem et tortor lacinia accumsan. Nunc quis dui enim. 
+				Vestibulum ullamcorper, leo in fringilla cursus, velit velit pellentesque ipsum, eu ullamcorper 
+				massa massa sit amet metus. Proin non erat feugiat, commodo nulla vel, pretium ex. Nullam gravida 
+				feugiat auctor.
+				</p>
+			</article>
+		</div>
+		
+		<!--Footer containing page decorative art.-->
+		<footer id="site-footer">
+			<!--Page bottom border decorative art.-->
+			<img src="Images/footer.svg" id="footerimage">
+			<!--Script to resize footer to match border art height-->
+			<script src="javascript/footerarea.js"></script> 
+		</footer>
+	</body>
+</html>

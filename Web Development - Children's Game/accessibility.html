@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="author" content="Alex Chapman">
+		<title>Accessibility</title>
+		<link rel="stylesheet" href="reset.css"/>
+		<link rel="stylesheet" href="main.css"/>		
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400,500,700" rel="stylesheet"> 		
+		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+		<script src="javascript/responsivebar.js"></script> 
+	</head>
+
+
+	<body>
+		<!-- Header containing main navbar-->
+		<header id=banner>
+				<!--Navbar container for logo and links on navbar-->
+				<nav class="navbartop">
+					<!--Both mobile and desktop logo variants are loaded to page at once
+					hidden or shown using a screen size dependent media query.-->
+					<img src="Images/LogoWithText.svg" id="navbarlogodesktop" alt="Site logo- A bubble with text reading The Playground.">
+					<img src="Images/LogoWithoutText.svg" id="navbarlogomobile" alt="Site logo- A bubble">	
+					<!--List of navbar links.-->
+					<ul class="navbar" id="MainNav">
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="founders.html">Founders</a>
+						</li>
+						<li>
+							<a href="reviews.html">Reviews</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Games</a>
+						</li>
+						<li>
+							<a href="contact.html">Contact</a>
+						</li>
+						<li>
+							<a href="accessibility.html">Accessibility</a>
+						</li>
+						<!--Icon for mobile list is included in unordered list. 
+						Enabled using screen size dependent media query.-->
+						<li class="navbaricon" id="MenuButton">
+							<a href="javascript:void(0);" onclick="dropdownMenu()">Menu</a>
+						</li>
+					</ul>
+				</nav>
+		</header>
+		
+		<main id="MainContent">
+			<h1 class="pageheader">Accessibility</h1>
+			<h2 class = "cardheading ReviewsSubsectionHeader">Accessibility Statement</h2>
+			<p class="pagegenerictext" id="AccessibilityStatement">When designing this site accessibility was taken into account
+			all images have been given an alt tag so that non-text content is easily interpretable via a screen reader.
+			In addition, the HTML used is well formed, which means the user can predictably jump around the page using 
+			access keys. Semantic elements have also been used to help screen reader software and those using access keys
+			quickly access parts of the site which are most of relevance to them.
+			</p>
+			<h2 class = "cardheading ReviewsSubsectionHeader">List Of Sources</h2>
+			<table class="pagegenerictext" id="ReferenceTable">
+				<tbody>
+					<tr>
+					<th>File Name</th>
+					<th>Pages Used On</th>
+					<th>Description</th>
+					<th>Author</th>
+					<th>Source</th>
+					<th>Licence</th>
+					</tr>
+					<tr>
+						<td>FREE GRASS AND PLANT VECTOR</td>
+						<td>All Pages</td>
+						<td>Uses vector art as scalable page border showing trees grass and ground. Has been modified and contents
+						rearranged only using segments of the original work in the final image.</td>
+						<td>sudutlancip</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>
+					<tr>
+						<td>Man Sitting Next To Person On Street</td>
+						<td>Founders</td>
+						<td>Used as an image for one of the fictional company Founder Bob Sawyer<</td>
+						<td><a src="https://www.pexels.com/u/clem-onojeghuo-47503/">Clem Onojeghuo</a></td>
+						<td><a src="https://www.pexels.com/photo/man-sitting-next-to-couple-of-person-walking-on-the-street-during-daytime-211050/">Pexels</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>White woman headshot blonde female</td>
+						<td>Founders</td>
+						<td>Used as an image for one of the fictional company Founder Sara Reid<</td>
+						<td><a src="https://pixabay.com/en/users/magicphoto215-2111903/">magicphoto</a></td>
+						<td><a src="https://pixabay.com/en/woman-white-headshot-blonde-female-1460150/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>Man wearing eyeglasses</td>
+						<td>Founders</td>
+						<td>Used as an image for one of the fictional company Founder Aaron Swift</td>
+						<td><a src="http://unsplash.com">Nick Karvounis</a></td>
+						<td><a src="https://unsplash.com/photos/7CQNuVvOKzc">Unsplash</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>Woman in sunglasses</td>
+						<td>Reviews</td>
+						<td>Used as an image for one of the fictional people giving a review about the company.</td>
+						<td><a src="https://pixabay.com/en/users/jill111-334088/">jill111</a></td>
+						<td><a src="https://pixabay.com/en/sunglasses-summer-pretty-young-woman-635269/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>			
+					<tr>
+						<td>Teacher headshot</td>
+						<td>Reviews</td>
+						<td>Used as an image for one of the fictional people giving a review about the company.</td>
+						<td><a src="https://pixabay.com/en/users/TawnyNina-1041483/">TawnyNina</a></td>
+						<td><a src="https://pixabay.com/en/secretary-librarian-teacher-1379839/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>PS4 Controller</td>
+						<td>News</td>
+						<td>Cover photo for a news article. Displays a playstation controller.</td>
+						<td><a src="https://pixabay.com/en/users/christianladewig0-1109845/">christianladewig0</a></td>
+						<td><a src="https://pixabay.com/en/joystick-console-video-games-xbox-1216816/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>		
+					<tr>
+						<td>Hong Kong Skyline</td>
+						<td>News</td>
+						<td>Cover photo for a news article. Displays the Hong Kong skyline at night.</td>
+						<td><a src="https://pixabay.com/en/users/designerpoint-554875/">designerpoint</a></td>
+						<td><a src="https://pixabay.com/en/hong-kong-peek-night-long-exposure-1791067/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>Los Angeles Nighttime</td>
+						<td>News</td>
+						<td>Cover photo for a news article. Displays a rainy night in downtown Los Angeles.</td>
+						<td><a src="https://pixabay.com/en/users/tpsdave-12019/">tpsdave</a></td>
+						<td><a src="https://pixabay.com/en/los-angeles-california-city-urban-1768743/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>London crowdsthrough day</td>
+						<td>News</td>
+						<td>Cover photo for a news article. Displays daytime in London featuring crowds of people</td>
+						<td><a src="http://unsplash.com">Nick Karvounis</a></td>
+						<td><a src="https://unsplash.com/">Unsplash</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>Xbox Controller</td>
+						<td>News</td>
+						<td>Cover photo for a news article. Displays a set of cartoon doors opening into bright light</td>
+						<td><a src="https://pixabay.com/en/users/mcmurryjulie-2375405/">mcmurryjulie</a></td>
+						<td><a src="https://pixabay.com/en/open-doors-open-exit-doorway-1518244/">Pixabay</a></td>
+						<td>Creative Commons Zero (CC0) license</td>
+					</tr>
+					<tr>
+						<td>FREE SMILING FRUIT VECTOR</td>
+						<td>Games/Playable Game</td>
+						<td>Used in display image for the Match The Pairs game. Also used in matching pairs game itself as decoration for the cards.</td>
+						<td>nightcharges</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>	
+					<tr>
+						<td>FREE CASINO VECTOR</td>
+						<td>Games</td>
+						<td>Used in display image for the "Slot Machine" game for decoration.</td>
+						<td>watchtaxinyc</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>
+					<tr>					
+						<td>Playing Card Back Vectors</td>
+						<td>Games/Playable Game</td>
+						<td>Used in display image for the "Match The Pairs" game and as "face down" cards in the playable match the pairs game.</td>
+						<td>orangereebok</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>	
+					<tr>	
+						<td>Claw Machine Vectors</td>
+						<td>Games</td>
+						<td>Used in display image for the "Claw Machine" game.</td>
+						<td>zhaolifang</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>
+					<tr>	
+						<td>Free Colorful Arcade Buttons</td>
+						<td>Games</td>
+						<td>Used in display image for the "Claw Machine" game.</td>
+						<td>shineonoat</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>
+					<tr>	
+						<td>Free Disabled Car Parking Vector</td>
+						<td>Games</td>
+						<td>Used in display image for the "Parking" and "Spot The Difference" games.</td>
+						<td>nightcharges</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>	
+					<tr>	
+						<td>Scrabble Vector Tiles</td>
+						<td>Games</td>
+						<td>Used in display image for the "Sliding Blocks" game.</td>
+						<td>lizamay1</td>
+						<td>Free Vector Graphics by <a href="https://www.vecteezy.com">Vecteezy</a></td>
+						<td>Non-exclusive right to use Eezy files to create new, derivative, unique works.</td>
+					</tr>	
+					<tr>	
+						<td>Nucleo Social Icons</td>
+						<td>Contact</td>
+						<td>Used as icons for links to social media website pages</td>
+						<td>Nucleo</td>
+						<td>Free Vector Graphics by <a href="https://nucleoapp.com/">Nucleo</a></td>
+						<td>You are permitted to use this free sample for any number of personal and commercial projects. </td>
+					</tr>		
+					<tr>	
+						<td>drawCell() Function</td>
+						<td>Playable Game (game.js</td>
+						<td>Used to draw an individual cell/game card on the canvas.</td>
+						<td>Dr Steve Maddock</td>
+						<td>Lecture 16 <a href="https://staffwww.dcs.shef.ac.uk/people/S.Maddock/campus_only/com1008/lectureNotes/l15_1up.pdf">Lecture 16: Web graphics: Part 2</a></td>
+						<td>Permission to reuse (assignment brief)</td>
+					</tr>
+					<tr>	
+						<td>getMouseXY(e)  Function</td>
+						<td>Playable Game (game.js)</td>
+						<td>Uses code from the getMouseXY(e) function to find the coodinates of where a player has clicked on the canvas. Used in GetPos() function</td>
+						<td>Dr Steve Maddock</td>
+						<td>Lecture 16 <a href="https://staffwww.dcs.shef.ac.uk/people/S.Maddock/campus_only/com1008/lectureNotes/l15_1up.pdf">Lecture 16: Web graphics: Part 2</a></td>
+						<td>Permission to reuse (assignment brief)</td>
+					</tr>	
+					<tr>	
+						<td>drawGrid() Function</td>
+						<td>Playable Game (game.js)</td>
+						<td>Iteratively draws a grid of squares on the canvas</td>
+						<td>Dr Steve Maddock</td>
+						<td>Lecture 16 <a href="https://staffwww.dcs.shef.ac.uk/people/S.Maddock/campus_only/com1008/lectureNotes/l15_1up.pdf">Lecture 16: Web graphics: Part 2</a></td>
+						<td>Permission to reuse (assignment brief)</td>
+					</tr>					
+				</tbody>
+			</table>
+		</main>
+		
+		<!--Footer containing page decorative art.-->
+		<footer id="site-footer">
+			<!--Page bottom border decorative art.-->
+			<img src="Images/footer.svg" id="footerimage">
+			<!--Script to resize footer to match border art height-->
+			<script src="javascript/footerarea.js"></script> 
+		</footer>
+	</body>
+</html>

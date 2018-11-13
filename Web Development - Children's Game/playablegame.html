@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="author" content="Alex Chapman">
+		<title>Match The Pairs</title>
+		<link rel="stylesheet" href="reset.css"/>
+		<link rel="stylesheet" href="main.css"/>		 
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400,500,700" rel="stylesheet"> 		
+		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+		<script src="javascript/responsivebar.js"></script> 
+	</head>
+
+
+	<body>
+		<!-- Header containing main navbar-->
+		<header id=banner>
+				<!--Navbar container for logo and links on navbar-->
+				<nav class="navbartop">
+					<!--Both mobile and desktop logo variants are loaded to page at once
+					hidden or shown using a screen size dependent media query.-->
+					<img src="Images/LogoWithText.svg" id="navbarlogodesktop" alt="Site logo- A bubble with text reading The Playground.">
+					<img src="Images/LogoWithoutText.svg" id="navbarlogomobile" alt="Site logo- A bubble">	
+					<!--List of navbar links.-->
+					<ul class="navbar" id="MainNav">
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="founders.html">Founders</a>
+						</li>
+						<li>
+							<a href="reviews.html">Reviews</a>
+						</li>
+						<li>
+							<a href="news.html">News</a>
+						</li>
+						<li>
+							<a href="games.html">Games</a>
+						</li>
+						<li>
+							<a href="contact.html">Contact</a>
+						</li>
+						<li>
+							<a href="accessibility.html">Accessibility</a>
+						</li>
+						<!--Icon for mobile list is included in unordered list. 
+						Enabled using screen size dependent media query.-->
+						<li class="navbaricon">
+							<a href="javascript:void(0);" onclick="dropdownMenu()">Menu</a>
+						</li>
+					</ul>
+				</nav>
+		</header>
+		
+		<main id="MainContent">
+			<h1 class="pageheader" id="gamepageheader">Match The Pairs</h1>
+			<canvas id="mycanvas"></canvas>
+			<script src="javascript/game.js"></script> 
+			<article>
+			<h2 id="InstructionsHeader">INSTRUCTIONS</h2>
+			<p class= "pagegenerictext" id="instructiontext">
+			The grid above consists of 4x4 grid of squares.<br>
+			Click a square to reveal is color<br>
+			If the color of two squares clicked in order matches, they will be permanently revealed<br>
+			Reveal all of the pairs of squares to win.
+			</p>
+			</article>
+		</main>	
+		
+		<!--Footer containing page decorative art.-->
+		<footer id="site-footer">
+			<!--Page bottom border decorative art.-->
+			<img src="Images/footer.svg" id="footerimage">
+			<!--Script to resize footer to match border art size-->
+			<script src="javascript/footerarea.js"></script> 
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,1125 @@
+/*
+Written By: Alexander Chapman
+*/
+
+/*<----------------------------------------------------------------->*/
+/*<------------------NAVIGATION BAR STYLING (DONE)------------------>*/
+/*<----------------------------------------------------------------->*/
+
+/*Adds a background to the header.*/
+#banner {
+	background-color:#2a2a2a;
+}
+
+/*Displays the logo on header bar with a set height of 50px */
+#navbarlogodesktop {
+	display:inline;
+	overflow: hidden;
+	height: 50px;
+}
+
+/*Hides mobile version of navbar logo by default. 
+This is displayed on smaller screen sizes when media query is called*/
+#navbarlogomobile{
+	display:none;
+}
+
+/*Container for the navbar which sits on the banner*/
+.navbar{
+	/*Floated right so that it sits on right hand side of screen, rather than inline next to logo.*/
+	float: right;
+	display:inline-block;
+	height: 50px;
+}
+
+/*Centres items in the unordered list and vertically places them in the middle of their box*/
+.navbartop ul{
+	text-align: center;
+	vertical-align: middle;
+}
+
+/*Styles desktop and narrow sized menu items, assiging their text styling properties.
+List items displayed inline so that they all sit along a single row,*/
+.navbartop li{
+	vertical-align: middle;
+	display: inline;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500;
+	border-left: 2px solid white;
+	height: 50px
+}
+
+/*Sets background color of Navbar so that text can be seen when dropdown menu is opened in mobile view.
+Otherwise, background of banner will not carry down to this child element when menu is opened.*/
+.navbar{
+    background-color: #2a2a2a;
+}
+
+/*Items floated left so that they appear to the left hand side of horizontal div.
+When list expanded in mobile view, menu items will float to the left hand side of the page,
+which distributes them away from the menu button.*/
+.navbar li {
+	float: left;
+    display: inline-block;	
+}
+
+/*Styles links on navbar removing standard hyperlink highlighting.*/
+.navbar li a {
+	/*Ensures that menu items are displayed inline but allows them to stack in column in mobile view*/
+    display: inline-block;
+    text-decoration: none;
+	color: white;
+	text-align: center;
+	padding: 1em 17px
+}
+
+/*When the user hovers over a navbar item it is highlighted and the text color is changed to a light blue.*/
+.navbar li a:hover{
+	background-color: #666;
+	color: #7de0d4;
+}
+
+/*The navbar menu button is disabled by default (Enabled via a media query)*/
+.navbar .navbaricon{
+	display: none;
+}
+
+/*Media query to make navebar behave responsively. This query enables mobile view for the navbar*/
+@media screen and (max-width:780px) {
+	/*Once the screen size is small enough, a different variant of the logo is displayed without a text
+	component to make it more compact*/
+	#navbarlogomobile{
+		display: inline;
+		height: 50px;
+		width: 10%;
+	}
+	
+	/*Logo with text is disabled at lower screen size*/
+	#navbarlogodesktop{
+		display: none;
+	}
+	
+	.navbar{
+		/*List of navbar items is given 90% of banner width. This leaves room for smaller logo.*/
+		width:90%;
+		/*Lets list expand vertically and take as much vertical space as it requires.*/
+		height: auto;
+	}
+	
+	/*Hides all list items so they are not shown on Navbar without menu button being pressed,*/
+	.navbar li{
+		display: none;
+	}
+	
+	/*Displays the Menu button in the right hand corner of the navbar*/
+	.navbar li.navbaricon {
+		float: right;
+		display: inline-block;
+	}
+	
+	/*Removes the vertical border lines applied to the menu buttons in desktop view*/
+	.navbartop li{
+		border: none;
+	}
+	
+	/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+	/*When the "Menu" button is pressed, responsivebar.js adds the .mobileview class to the unordered list of anchors.
+	  Therefore, the following classes are used, to give the appearance of a drop-down menu.*/
+	/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+	
+	
+	.navbar.mobileview {
+		/*Positions navbar over page content*/
+		position: absolute;
+		/*Makes navbar options appear on the line under the banner which we know has a static height of 50px.*/
+		top: 50px;
+		/*Navbar stays fixed to the right hand side of the page as to give the appearance of being also fixed to the right hand side on dropdown.*/
+		right: 0;
+		z-index: 999;
+	}
+	
+	/*The rule above repositions the menu button by 50px so it sits under the banner. This rule undoes that and keeps the navbar in its usual position
+	on the banner bar.*/
+	.navbar.mobileview li.navbaricon {
+		position: absolute;
+		right: 0;
+		top: -50px;
+	}
+  
+	
+  	.navbar.mobileview li {
+		/*Removes the float already applied to list item. Otherwise, items would sit in a horizontal list.*/
+		float: none;
+		display: block;
+	}
+  
+	.navbar.mobileview li a {
+		/**/
+		text-align: left;
+		padding: 1em 3%;
+		/*Makes list of anchors on navbar display in a vertical list*/
+		display: block;
+	}
+}
+
+/*<--------------------------------------------------------------->*/
+/*<------------------GENERIC PAGE STYLING (DONE)------------------>*/
+/*<--------------------------------------------------------------->*/
+
+/*Gives the background of the whole page an off white color.*/
+body{
+	background-color:#F7EDE2
+}
+
+/*<------------------GENERIC PAGE HEADER (DONE)------------------>*/
+/*Styles the main header on a page.*/
+.pageheader{
+	font-family: 'Gloria Hallelujah', cursive;
+	text-align: center;
+	color: #333333;
+	font-size: 10vmin;
+	margin: 20px 20% 20px 20%;
+	
+}
+
+/*<------------------GENERIC PAGE WRAPPER (DONE)------------------>*/
+/*A generic flexbox wrapper which is styled further using an element ID for each individual flex instance on 
+each webpage. All block elements belonging to this class will be flex containers. Containers will be displayed by
+default in a column to give a mobile friendly appearance. Media queries have been used alongside specific IDs to ensure
+content can adapt to larger viewports.*/
+.MainContent{
+	display: -ms-flexbox;    
+	display: -webkit-flex;
+	display: flex;
+	flex-flow: column;
+	padding: 0;
+	list-style: none;
+    align-items: center;
+}
+
+/*<------------------GENERIC TEXT COMPONENTS (DONE)------------------>*/
+
+/*Generic styling for page headings. Further styling may be applied via page specific classes or the ID attribute.*/
+.cardheading{
+	font-size:2em;
+	font-weight: 700;
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 1%;
+	text-decoration: none;
+}
+
+/*Generic styling for page subheadings. Further styling may be applied via page specific classes or the ID attribute.*/
+.cardsubheading{
+	font-size:1.2em;
+	font-family: 'Ubuntu', sans-serif;
+	font-style: italic;
+	margin-top: 1%;
+	margin-bottom: 1em;
+	padding-left: 2%;
+}
+
+/*Generic styling for other page text. Further styling may be applied via page specific classes or the ID attribute.*/
+.pagegenerictext{
+	font-family: 'Ubuntu', sans-serif;
+	text-align: justify;
+	line-height: 1.2em;
+	font-size: 1.3em;
+	margin: auto auto 2% auto;
+}
+
+/*Styling for disclaimer text found on founders and reviews pages.*/
+.disclaimertext{
+	font-weight: 300i;
+	font-style: italic;
+	margin: 2vh 20%;
+	text-align: center;
+}
+
+/*Additional styling for text at diffent screen sizes to make page contents responsive to a
+change in viewport size.*/
+@media screen and (min-width:780px) {
+	.pagegenerictext{
+		font-size: 1.5em;
+	}
+}
+
+@media screen and (min-width:1280px) {
+	.pagegenerictext{
+		font-size: 1.9em;
+	}
+}
+
+/*<------------------BUTTON STYLING (DONE)------------------>*/
+/*General styling for buttons across the website. Used on anchor elements, uses border and text decoration
+edits to give appearance of a traditional button. Also adds resposnive behaviour.*/
+.button{
+	background-color: #f7ede2;
+    border: none;
+	border-style: solid;
+	border-color: #333333;
+	text-decoration: none;
+	padding: 14px 31px;
+    margin: 2vh auto;
+	font-family: 'Gloria Hallelujah', cursive;
+	font-size: 1em;
+	text-decoration: none;
+	color: #333333;
+	width: 65%;
+	text-align: center;
+}
+
+/*Gives feedback to user, displays a shadow when the user hovers over the button.*/
+.button:hover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*Flexbox uses for any area on the site containing buttons. Using media query (see below) flex-flow changes from
+column wrap to row wrap as screen width increases, fitting multiple buttons on a single line.*/
+.genericbuttonarea{
+
+	display: -ms-flexbox;    
+	display: -webkit-flex;
+	display: flex;
+	margin: 10% 0 0 0;
+	flex-flow: column wrap;
+}
+
+/*For narrow sized screens, buttons are allowed to be a larger size on page. 
+Displayed along a row rather than stacked vertically within container.*/
+@media screen and (min-width:780px) {
+	.genericbuttonarea{
+		width: 60%;
+		flex-flow: row wrap;
+	}
+	
+	.button{
+		width: 15%;
+	}
+}
+
+/*Allows buttons even more spacing and screen area as viewport size increases.*/
+@media screen and (min-width:1280px){
+	.genericbuttonarea{
+		width: 75%;
+		margin: 10vh auto 10vh auto;
+	}	
+}
+
+/*<------------------PAGE OVERLAY ART (DONE)------------------>*/
+
+/*Styles the cartoon tree art so that it is permanently overlayed along the bottom of the page.
+see footerarea.js for javascript adding responsive margin to footer area, so that once the user
+has reached the bottom of the page, this art doesn't cover other body content.*/
+#footerimage{
+	position:fixed;
+	left:0px;
+	bottom: 0px;
+}
+ 
+/*<---------------------------------------------------------------->*/
+/*<------------------PAGE SPECIFIC STYLING (DONE)------------------>*/
+/*<---------------------------------------------------------------->*/
+
+
+
+/*<------------------SPLASH PAGE (DONE)------------------>*/
+
+/*Centres container for company name header.*/
+#SplashTitleArea{
+	margin: 5vh auto 5% auto;
+}
+
+/*Resizes the page header text responsively using width and height.*/
+#splashheader{
+	font-size: 12vmin;
+}
+
+/*Responsively resizes the page subtitle to fit content nicely to page dimensions.*/
+#splashsubtitle{
+	margin: 12% auto 0 auto;
+	width: 80%;
+	font-size: 2.5vh;
+	text-align: center;
+}
+
+
+@media screen and (min-width:780px) {	
+	#SplashButtonArea{
+		margin: 10vh auto 10vh auto;			
+	}
+}
+
+@media screen and (min-width:1280px){
+	#splashheader{
+		margin-top: 5vh;
+	}
+}
+
+/*<------------------FOUNDERS PAGE (DONE)------------------>*/
+/*Styles flex boxes which should be vertically stacked on page.
+Acts as a container for information about individual "founder". 
+Cards are designed to always be displayed vertically and never wrap into rows.*/
+.ResponsiveFullCard{
+	width: 90%;
+	border: none;
+	border-width: 1vmin;
+	border-style: solid;
+	border-color: #333333;
+	margin: 0 0 5vh 0;
+}
+
+/*Figure contains each founder's image. Displayed as a block level element with additional
+ styling applied to change this at larger screen sizes.*/
+.founderimg figure{
+	margin: 2.5% 5% 2.5% 5%;	
+	display: block;
+	position: relative;
+	text-align: center;
+	font-style: italic;
+	overflow: hidden;
+    max-width: 100%;
+    height: auto;
+}
+
+/*Styles the image for each founder's article. Each image is made circular, centered
+ within its figure and the overflow is hidden. */
+.founderimg img{
+    max-width: 50%;
+    height: auto;	
+	border: 5px solid #333333;
+	border-radius: 50%
+}
+
+/*Styles the text part of each founder's box. Table-cell alignment helps to style image and text side by side at 
+larger screen sizes.*/
+.founderdetails {
+	display: table-cell;
+	padding: 0 5% 1% 2.5%;
+	max-width: 100%;
+    height: 100%;
+}
+
+/*Applies additional styling for narrow devices.*/
+@media screen and (min-width: 780px){
+	/*Founder image takes up a smaller proportion of screen width to give
+	a more compact appearance to each card, but a more spacious design overall.*/
+	.ResponsiveFullCard{
+		width: 75%;
+	}
+	
+	/*Founder's picture is displayed to the left of article text (Rather than above it)*/	
+	.founderimg{
+		float:left;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	/*Size of image is increased within the figure.*/
+	.founderimg img{
+		max-width: 90%;
+	}
+}
+
+/*Applies additional styling for much larger devices.*/
+@media screen and (min-width:1280px) {
+	/*Increases padding to give more spacing to text elements in each article*/
+	.founderdetails {
+		padding: 0 5% 2.5% 2.5%;
+	}
+}
+
+
+
+/*<------------------GAMES PAGE (DONE)------------------>*/
+
+/*Flexboxes designed to be sat in columns in mobile view,
+in narrow/desktop view, boxes will wrap along rows.*/
+.ResponsiveThreeCard{
+	margin: 0px auto 30px auto;
+	width: 80%;
+	border: 5px solid #333333;
+	text-align: center;
+}
+
+.HoverCard{
+	/*Outer div has attribute position:relative so that when the user hovers over a card,
+	the albslute positioned inner container (.HoverInfo) is overlaid above its containing div 
+	rather than positioning absolute according to the whole.*/
+	position: relative;
+	/*Spaces out so that contained elements do not touch the border of their parent box.*/
+	padding: 1%;
+}
+
+/*Inner container used to style overlay text and position over parent element*/
+.HoverInfo{
+	/*Position on the page relative to its ancestor*/
+	position:absolute;
+	/*Positioning attributes are used to position and scale the inner overlay div exactly on 
+	top of the outer div element, so that text is overlayed and the semi-transparent background
+	overlays the whole image*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	/*Sets background color to a dark blue color. Has opacity set to 0.7 so the user can still see some
+	of the image placed in the parent container beneath HoverInfo*/
+	background: rgba(0, 26, 35, 0.7);
+	/*Sets text color to white so that it is easily visible on overlay against dark background.*/
+	color: #ffffff;
+	/*Hides the element by default. This class is then revealed on hover over its parent (see below)*/
+	visibility: hidden;
+	/*Generic font styling attributes*/
+	font-size:2em;
+	font-weight: bold;
+	font-family: 'Ubuntu', sans-serif;
+	/*Centres and spaces text within the box.*/
+	padding: 20% auto 20% auto;
+}
+
+/*When the user hovers over a card with .HoverCard class (found within each of the page's flexboxes), the 
+overlayed element belonging to the HoverInfo class is revealed and overlayed across the HoverCard ancestor.*/
+.HoverCard:hover .HoverInfo{
+  visibility: visible;
+}
+
+/*Removes standard hyperlink underline and color change from linked elements within a HoverInfo div.
+Also ensures paragraph text does not have an underline. Reapplied to box header in next set of styles.*/
+.HoverInfo:link{
+	text-decoration: none;
+	font-size: 3vh;
+}
+
+/*Spaces the header of each card. Fixed font size used to position elements sensibly within box.
+Adds an underline to title to make it clear that the box is hyperlinked to another page.*/
+.HoverInfo h2{
+	margin: 10% 5%;
+	font-size: 30px;
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+/*Spaces the longer paragraph of text found on each page to center
+reduces font weight to make header stand out.*/
+.HoverInfo p{
+	margin: 10% 5%;
+	font-weight: 400;
+}
+
+/*Additional styling for narrow screens.*/
+@media screen and (min-width: 780px){
+	
+	/*Adds margin at top and bottom of container to make page appear less cramped. 
+	Flex now wraps along rows meaning muliple "ResponsiveThreeCard" divs can be found on each row.
+	ResponsiveThreeCard divs are centered and evenly space along their row.*/
+	#GamesMainConent{
+		flex-flow: row wrap;
+		margin: 3% auto;
+		justify-content: center;
+	}
+	
+	/*Increases the spacing between each flexbox*/
+	.ResponsiveThreeCard{
+		width:30%;
+		margin: 0 5% 30px 5%;
+	}
+	
+	/*Further styling for each box's header*/
+	.HoverInfo h2{
+	font-size: 18px;
+	}
+
+	/*Further styling for each box's main text*/
+	.HoverInfo p{
+	margin: 15% 5%;
+	font-size: 13px;
+	}
+}
+
+/*Additional stying for even larger screens.*/
+@media screen and (min-width:1280px) {
+	/*Allows three cards per row before wrapping to next. Adds more spacing as 
+	more screen space available.*/
+	.ResponsiveThreeCard{
+		width:25%;
+		margin: 0 3% 30px 3%;
+	}
+
+	/*Further styling for each box's header. Makes content larger and more spaced out.*/	
+	.HoverInfo h2{
+	margin: 15% 5%;
+	font-size: 80%;
+	}
+
+	/*Further styling for each box's main text. Makes content larger and more spaced out.*/
+	.HoverInfo p{
+	margin: 15% 5%;
+	font-size: 70%;
+	}
+	
+}
+
+
+
+/*<------------------NEWS PAGE (DONE)------------------>*/
+
+/*Page Header. Used alongside generic page header to add extra styling for this page.
+reduces margin to fit more news articles on page around the header.*/
+#NewsPageHeader{
+	display: block;
+	margin: 20px 45% 20px 45%;
+}
+
+/*Floats the sidebar right so that on wider screens it is displayed side by side with news articles.*/
+#sidebar{
+	display: inline-block;
+	float: right;
+	margin: 0 10% 10% 0%;
+    width: 15%;
+	background-color: #FFE2D1;
+}
+
+/*Used alongside generic header styler to keep house style.*/
+#sidebarheader{
+	font-size: 90%;
+	color: #333333;
+}
+
+/*Container for news articles displayed in rows, wrapping to the next row when necessary.*/
+.newscontainer{
+	display: inline-flex;
+	float: left;
+	margin: 0 0 0% 5%;
+	width: 65%;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+/*Each individual news item also has inline flex display. This means that in mobile view
+text content will appear under the image rather than next to it.*/
+.newsitem{
+	display: inline-flex;	
+	margin:0 0 4vh 0;
+	width: 48%;
+	height: 300px;
+	border: 5px solid #333333;
+	background-color: #ffe2d1;
+	color: white;
+	font-weight: bold;
+	flex-direction: row;
+}
+
+/*Makes the image take up half of its parent news card*/
+.newsitemimg{
+	display: inline-block;
+	width: 50%;
+	height:auto;
+	overflow:hidden;
+}
+
+/*Ensures the image is centered in its parent with overflow occuring
+at either side of the parent.*/
+.newsitemimg img{
+	display: block; 
+	margin: 0 auto 0 auto;
+	max-height: 300px;
+	position:50%;
+}
+
+/*Styles text area for each news card*/
+.newsitemdetails{
+	display: inline-block;
+	width: 50%;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+/*Styles header elements for each news card.*/
+.newsitemheader{
+	padding: 2%;
+	font-size: 2em;
+	font-style: justify;
+	color: #4f0147;
+	text-decoration: underline;
+	line-height: 1.1em;
+}
+
+/*Colours the background of each article on sidebar and adds spacing*/
+.sidebararticle{
+	margin: 2vh auto 2vh auto;
+	width: 80%;	
+	background-color: #333333;	
+}
+
+/*Ensures each sidebar image is the same size and width regardless of original image dimensions*/
+.sidebararticle img{
+	display: block;
+	margin: 0 auto 0 auto;	
+	max-height: 150px;
+	width: 100%;
+	overflow: hidden;
+}
+
+/*Styles the heading text used on sidebar*/
+.sidebarheading{
+	color: white;
+	font-size: 100%;
+}
+
+/*Styles the subheading text used on sidebar*/
+.newssubheading{
+	margin: 2vh 0;
+	font-weight: 400;
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	font-style: italic;
+}
+
+/*Changes the color of visited links so the user knows which links
+that they have already visited.*/
+.newsitemheader:visited{
+	color: #4f0147;
+}
+
+/*Media query used to style screen when narrow.*/
+@media screen and (max-width:1280px){
+	/*Hides the sidebar*/
+	#sidebar{
+	display:none;
+	}
+	
+	/*Increases the news container to display pagewide*/
+	.newscontainer{
+		width: 100%;
+		margin: auto;
+		position: relative;
+	}	
+	
+	/*Increases the proportion of screen taken up by each news item*/
+	.newsitem{
+		width:45%;
+		height:80%;
+		margin: 10px auto 10px auto;
+	}
+}
+
+/*Media query used to edit screen for mobile devices.*/
+@media screen and (max-width: 780px){	
+	/*Gives less spacing to page header so more content can be placed on smaller page.*/
+	#NewsPageHeader{
+		margin: 20px auto 5px auto;
+	}
+	
+	/*Displays news items in a column rather than the rows seen at higher screen sizes.*/
+	.newscontainer{
+		flex-direction: column;
+	}
+	
+	/*News items displayed vertically along with their contents. Text now under header image
+	article allowed more horizontal screen space.*/
+	.newsitem{
+		width:90%;
+		max-width: 300px;
+		height:500px;
+		margin: 10px auto 10px auto;
+		flex-direction: column;
+	}
+	
+	/*Tells image to resize to fit its container and center itseld*/
+	.newsitemimg{
+		width: 100%;
+		height:auto;
+	}
+
+	.newsitemimg img{
+		margin-left: auto;
+		margin-right: auto;
+		min-width:100%
+	}
+	
+	/*Restyles text which is now displayed underneath image.*/
+	.newsitemdetails{
+		display: inline-block;
+		width: 100%;
+		height:50%;
+	}
+}
+
+.NewsPage{
+	display: -ms-flexbox;    
+	display: -webkit-flex;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	flex-flow: column;
+	padding: 0;
+	list-style: none;
+    align-items: center;
+	text-align: justify;
+}
+
+/*<------------------CONTACT FORM (DONE)------------------>*/
+
+/*Styles flexboxes to centre on the page and fill 90% of the screen width in mobile view
+further stylings are made at larger screen sizes via a media query (see below)*/
+.FormPageHalfFlex{
+	display: inline-block;
+	width: 90%;
+	margin: 0 auto;
+}
+
+/*Styling for input boxes on form*/
+.GET-generic{
+	display: block;
+	margin: 2% 0;
+	width: 90%;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 3vh;
+	text-align: justify;
+	border: 3px solid #333333;
+}
+
+/*Adds spacing using margin and centers text within the contact details flexbox.*/
+#FormPageContactDetails{
+	text-align:center;
+	margin: 5vh 0 0 0;
+}
+
+/*Centers text and adds spacing around field*/
+#FormAddress{
+	text-align: center;
+	margin: 2vh auto 2vh auto;
+}
+
+/*Adds spacing around phone number field and centres text.*/
+#phonenumber{
+	margin: 2vh auto 2vh auto;
+	text-align: center;
+}
+
+/*Displays social media icons in a horizontal list.*/
+#socialbuttons{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+/*Adds a shadow when user clicks/taps/focuses on an input box*/
+.GET-generic:focus{
+	box-shadow: 0 16px 20px 0 rgba(0,0,0,0.3), 0 11px 42px 0 rgba(0,0,0,0.22);
+}
+
+/*Centers the propmpt for each of the page's flexboxes. Gives user clear context about a box's contents.*/
+.FormPagePrompt{
+	text-align: center;
+	margin: 0 auto 0 auto;
+}
+
+/*Styles labels for contact details giving clarity on what information is displayed in each area.*/
+.ContactInfoHeader{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 5vh;
+	font-weight: 700;
+	margin: 0 0 2% 0;
+}
+
+/*Additional styling to "comment" input box as this box expects more text than the others,
+hence the size of text in this box has been decreased to increase readability and to let more content fit
+on screen.*/
+#GET-comment{
+	width: 90%;
+	font-size: 3vh;
+}
+
+/*Used on form labels alongside a generic text class, to give standard text design seen across the site.
+This class lets the label text scale according to the height of the viewport.*/
+.formlabel{
+	font-size: 4vh;
+}
+
+/*Spaces social icons and displays list items inline so that icons are not displayed on different lines.*/
+.socialicon{
+	display: inline;
+	margin: 0 2% 0 2%;
+}
+
+/*Ensures that icons remain a respectable size on the page.*/
+.socialicon img{
+ width: 15%;	
+}
+
+/*Increases the size of icons on hover to make it clear and intuitive to the user that they are an interactable button.*/
+.socialicon:hover img{
+	transform: scale(1.3);
+}
+
+/*Applies additional styling to narrow devices*/
+@media screen and (min-width:780px) {
+	/*Edits button div so that buttons are spaced further from the previous div. 
+	Takes advantage of increased screen area and scales responsively.*/
+	#FormButtonArea{
+		margin: 5vh auto 2vh auto;
+	}
+	
+	/*Increases size of buttons on page for narrow screens.*/
+	.formbutton{
+		width: 35%;
+	}
+	
+	/*Takes advantage of larger screen area and increases text size for text input by the user*/
+	#GET-comment{
+	font-size: 2vh;
+	}
+
+	/*Increases the size of labels for input boxes.*/
+	.formlabel{
+	font-size: 3vh;
+	}	
+}
+
+/*Applies additional stylig when page is viewed on larger screens.*/
+@media screen and (min-width:1280px) {
+	/*Flexboxes will fit along a row on larger screen sizes(but wrap to next row if necessary)*/
+	.NewsPage{
+		flex-flow: row wrap;
+		align-items: flex-start;
+		margin: 0 5% 100px 5%;
+	}	
+	
+	/*Each flexbox takes up 50% of screen area (both flexboxes fit to one row.)*/
+	.FormPageHalfFlex{
+	width: 50%;
+	margin: 0 auto;
+	}
+	
+	/*Centers content within the Contact Details flexbox to suit larger screen size. Places both flexbox 'prompts'
+	at same height on page*/
+	#FormPageContactDetails{
+		margin: 0 auto 0 auto;
+	}
+	
+	/*Adds a border to right hand side of flexbox as to give the appearance of a divider between the two flexboxes
+	on the page. Also decreases size of this flexbox slightly as to avoid flexboxes wrapping to the next row.*/
+	#FormPageLeftHalf{
+		border-right: 5px solid #333333;
+		width:49%;
+	}
+	
+	/*Responsively styles text and social media icon elements on page (as seen above)*/
+	#GET-comment{
+	width: 90%;
+	font-size: 2vh;
+	}
+
+	.formlabel{
+	font-size: 2vh;
+	}
+	
+	.GET-generic{
+	display: block;
+	margin: 1.5% 0;
+	font-size: 2vh;
+	}
+	.socialicon img{
+	width: 10%;	
+	}
+}
+	
+/*<------------------ARTICLE PAGE (DONE)------------------->*/	
+	
+	/*Adds margin to edge of the header image so that it is horizontally centered and
+	vertically spaced out.*/
+	#MainImage{
+	margin: 2vh auto 2vh auto;
+	}
+	
+	/*If an actual image was used (other than the placeholder image), this would ensure the image only
+	uses a sensible amount of space on the page.*/
+	#MainImage img{
+    max-width: 100%;
+    height: auto;
+	}
+	
+	/*Horizontally centres contents of the article and adds a margin so article contents is compact
+	and doesnt run edge to edge (that would be more difficult to read)*/
+	#SinglePageArticle{
+		margin: 2vh auto 2vh auto;
+		width: 90%;
+	}
+	
+	/*Styles figures used in the article so that text can wrap nicely around them.
+	A border has been added to make the figure clealy seperable from the rest of the
+	content in the article.*/
+	.FigureInArticle{
+		margin: 2%;
+		border: 3px solid #333333;
+		max-width: 100%;
+	}
+	
+	/*Styling and adding spacing to the figure image.*/
+	.FigureInArticle img{
+		display: block;
+		max-width: 100%;
+		margin: 0 auto 3px auto;
+	}
+	
+	/*Makes the caption use the font style of the site.*/
+	.FigureInArticle figcaption{
+		font-family: 'Ubuntu', sans-serif;
+	}
+	
+	/*Extra styling for narrow screens*/
+	@media screen and (min-width:780px) {	
+		/*Ensures header image stays centred at larger sizes and allows it more screen space.*/
+		#MainImage img{
+		display: block;
+		max-width: 70%;
+		height: auto;
+		margin: 2vh auto 2vh auto;
+		}
+		
+		.FigureInArticle{
+		float: right;
+		max-width: 50%;
+		}
+	}
+	
+	/*Extra styling for desktop screens.*/
+	@media screen and (min-width:1280px) {
+		/*Allows main image a greater amount of space on the screen.*/
+		#MainImage img{
+		max-width: 60vh;
+		}
+		
+		/*Makes article content more compact so that text doesn't run 
+		from edge to edge of the screen*/
+		#SinglePageArticle{
+			width: 70%;
+		}
+		
+		/*Adds extra styling to figures so that they remain a respectable and unobrtusive size.*/
+		.FigureInArticle{
+			max-width: 30%;
+		}
+
+	}
+	
+/*<------------------PLAYABLE GAME PAGE (DONE)------------------>*/
+	/*Styles page title*/
+	#gamepageheader{
+		font-size:6vh;
+		margin: 4vh auto;
+	}
+	
+	#InstructionsHeader{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 5vh;
+	font-weight: 700;
+	margin: 5vh 0 2% 0;
+	text-align: center;
+	text-decoration: underline;
+	}
+	
+	#instructiontext{
+		text-align: center;
+		width: 80%;
+	}
+	/*Styles and cantres canvas. Heigh and width properties are set via javascript when game is initialised (see)*/
+	#mycanvas{
+	border: 3px solid #000;
+	margin: 0 auto;
+	display: block;
+	}
+	
+/*<------------------REVIEWS PAGE (DONE)------------------>*/
+
+/*Additional styling to flexbox container in addition to generic "MainContent" container class
+Ensures that content fits nicely on the page.*/
+#ResponsiveReviewsCards{
+	width: 100%;
+	min-height: 300px;
+}
+
+/*Styles the titles for each subsection of the page (links/testemonials). Displayed as block with width 100% so other
+from other content within flexbox container will move to a new line instead.*/
+.ReviewsSubsectionHeader{
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
+/*Additional class used in conjunction with ResponsiveThreeCard class. Removes vertical centering caused by
+this class so that flexboxes align with the top of their container.*/
+.ThreeCardReviews {
+	align-self: flex-start;
+	background-color: #333;
+}
+
+/*Styles links in flexboxes so that they stand out to the user.*/
+.ThreeCardReviews a{
+	text-decoration: underline;
+	color: white;
+}
+
+/*Styles images used in each flexbox with a link to an external website, ensures that the whole image is shown on
+and scaled to fit within its parent sensibly.*/
+.ReviewLinkImage{
+	max-width: 100%;
+	max-height: 15vh;
+}
+
+/*Styling to link name text to make it stand out.*/
+.reviewscardtext h3{
+	padding: 2%;
+	font-size: 2em;
+}
+
+/*Styling for further description of a linked website.*/
+.reviewscardtext p{
+	padding: 2%;
+	font-size: 1em;
+}
+
+@media screen and (min-width:780px) {
+	#ResponsiveReviewsCards{
+		flex-flow: row wrap;
+		margin: 1vh auto;
+		justify-content: center;
+	}
+}
+
+/*<------------------ACCESSIBILITY PAGE (DONE)------------------>*/
+
+/*Styling for table of references*/
+#ReferenceTable{
+	margin: 5vh auto;
+	width: 90%;
+	border-collapse: collapse;
+	border: 2px solid #333333;
+}
+
+#ReferenceTable th{
+	font-size: 80%;
+	padding: 0 2%;
+	border-bottom: 4px solid #333333;
+
+}
+
+#ReferenceTable td{
+	font-size: 60%;
+	padding: 2vh 2%;
+}
+
+#AccessibilityStatement{
+	width: 80%;
+}
+
+@media screen and (max-width:780px) {
+	#ReferenceTable{
+	margin: 3vh auto;
+	width: 100%;
+	border: 1px solid #333333;
+	}
+	#ReferenceTable th{font-size:60%}
+	#ReferenceTable td{font-size:40%}
+
+}
