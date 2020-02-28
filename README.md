@@ -3,7 +3,7 @@
 A portfolio of projects I have undertaken over the last couple of years.
 
 ## Asset Management
-This was a group project I took part in during 2018, to build an asset management system for AMRC Sheffield.The project focused on seeing a software
+This was a group project I took part in during 2018, to build an asset management system for AMRC Sheffield. The project focused on seeing a software
 engineering project through from inception to completion. The presented solution won a competition against a number of other teams.
 
 ## CPP Web Provisioning For Arduino
